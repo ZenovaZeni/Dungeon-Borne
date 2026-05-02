@@ -9,7 +9,7 @@ namespace Dungeonborn.Loot
         [SerializeField] private LootItemDefinition item;
         [SerializeField] private TextMeshPro label;
         [SerializeField] private float rotateSpeed = 90f;
-        [SerializeField] private float pickupRadius = 1.1f;
+        [SerializeField] private float pickupRadius = 1.8f;
         [SerializeField] private float bobHeight = 0.25f;
         [SerializeField] private float bobSpeed = 4f;
 
@@ -29,6 +29,7 @@ namespace Dungeonborn.Loot
         private void Start()
         {
             Configure(item);
+            EnsurePickupCollider();
             basePosition = transform.position;
         }
 
@@ -67,11 +68,25 @@ namespace Dungeonborn.Loot
                 return;
             }
 
-            var distanceSquared = (player.transform.position - transform.position).sqrMagnitude;
+            var toPlayer = player.transform.position - transform.position;
+            toPlayer.y = 0f;
+            var distanceSquared = toPlayer.sqrMagnitude;
             if (distanceSquared <= pickupRadius * pickupRadius)
             {
                 Pickup(player);
             }
+        }
+
+        private void EnsurePickupCollider()
+        {
+            var sphere = GetComponent<SphereCollider>();
+            if (sphere == null)
+            {
+                sphere = gameObject.AddComponent<SphereCollider>();
+            }
+
+            sphere.isTrigger = true;
+            sphere.radius = Mathf.Max(sphere.radius, pickupRadius);
         }
 
         private void Pickup(GameObject player)

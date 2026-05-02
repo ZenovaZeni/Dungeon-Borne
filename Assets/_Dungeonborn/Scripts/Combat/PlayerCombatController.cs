@@ -1,6 +1,8 @@
 using Dungeonborn.Characters;
+using Dungeonborn.Enemies;
 using Dungeonborn.Input;
 using Dungeonborn.UI;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Dungeonborn.Combat
@@ -21,6 +23,7 @@ namespace Dungeonborn.Combat
         [SerializeField] private float cleaveKnockback = 0.45f;
         [SerializeField] private float stompKnockback = 0.65f;
         [SerializeField] private float rageKnockback = 0.9f;
+        [SerializeField] private float prototypeEnemyHitTolerance = 0.9f;
 
         private readonly SkillCooldownBook cooldowns = new SkillCooldownBook();
         private PlayerInputReader input;
@@ -107,33 +110,83 @@ namespace Dungeonborn.Combat
 
             var origin = attackOrigin != null ? attackOrigin : transform;
             SpawnPlaytestAttackMarker(skill, origin);
-            var hits = Physics.OverlapSphere(origin.position, skill.Range, enemyLayers);
-            foreach (var hit in hits)
+            var damagedTargets = new HashSet<Damageable>();
+            foreach (var target in GetSkillTargets(skill, origin.position))
             {
-                var toTarget = hit.transform.position - origin.position;
-                toTarget.y = 0f;
-
-                if (skill.Shape == SkillShape.Cone)
+                if (target == null || !damagedTargets.Add(target))
                 {
-                    var angle = Vector3.Angle(motor.FacingDirection, toTarget.normalized);
-                    if (angle > skill.ConeAngle * 0.5f)
-                    {
-                        continue;
-                    }
+                    continue;
                 }
 
-                if (hit.TryGetComponent<Damageable>(out var damageable))
+                var toTarget = target.transform.position - origin.position;
+                toTarget.y = 0f;
+                var result = target.ApplyDamage(skill.Damage);
+                target.ApplyKnockback(toTarget.sqrMagnitude > 0.001f ? toTarget : motor.FacingDirection, GetKnockbackFor(skill));
+                if (damageNumbers != null)
                 {
-                    var result = damageable.ApplyDamage(skill.Damage);
-                    damageable.ApplyKnockback(toTarget.sqrMagnitude > 0.001f ? toTarget : motor.FacingDirection, GetKnockbackFor(skill));
-                    if (damageNumbers != null)
-                    {
-                        damageNumbers.Spawn(hit.transform.position + Vector3.up * 1.8f, result.Amount);
-                    }
+                    damageNumbers.Spawn(target.transform.position + Vector3.up * 1.8f, result.Amount);
                 }
             }
 
             return true;
+        }
+
+        private IEnumerable<Damageable> GetSkillTargets(SkillDefinition skill, Vector3 origin)
+        {
+            foreach (var hit in Physics.OverlapSphere(origin, skill.Range, enemyLayers, QueryTriggerInteraction.Collide))
+            {
+                var damageable = hit.GetComponentInParent<Damageable>();
+                if (IsValidSkillTarget(damageable, skill, origin))
+                {
+                    yield return damageable;
+                }
+            }
+
+            // CharacterController-backed prototype enemies can be unreliable with simple overlap checks.
+            // This keeps the sandbox testable while the art/animation collision setup is still placeholder.
+            foreach (var damageable in FindObjectsByType<Damageable>(FindObjectsInactive.Exclude))
+            {
+                if (IsValidSkillTarget(damageable, skill, origin))
+                {
+                    yield return damageable;
+                }
+            }
+        }
+
+        private bool IsValidSkillTarget(Damageable damageable, SkillDefinition skill, Vector3 origin)
+        {
+            if (damageable == null || damageable.IsDead || damageable.gameObject == gameObject)
+            {
+                return false;
+            }
+
+            var isEnemyLayer = (enemyLayers.value & (1 << damageable.gameObject.layer)) != 0;
+            var hasEnemyBrain = damageable.TryGetComponent<EnemyBrain>(out _);
+            if (!isEnemyLayer && !hasEnemyBrain)
+            {
+                return false;
+            }
+
+            var toTarget = damageable.transform.position - origin;
+            toTarget.y = 0f;
+            var effectiveRange = skill.Range + prototypeEnemyHitTolerance;
+            if (toTarget.sqrMagnitude > effectiveRange * effectiveRange)
+            {
+                return false;
+            }
+
+            if (skill.Shape != SkillShape.Cone)
+            {
+                return true;
+            }
+
+            if (toTarget.sqrMagnitude <= 0.001f)
+            {
+                return true;
+            }
+
+            var angle = Vector3.Angle(motor.FacingDirection, toTarget.normalized);
+            return angle <= skill.ConeAngle * 0.5f;
         }
 
         private void SpawnPlaytestAttackMarker(SkillDefinition skill, Transform origin)
