@@ -12,7 +12,7 @@ namespace Dungeonborn.UI
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void CreateOverlay()
         {
-            if (FindObjectOfType<PrototypeHudOverlay>() != null)
+            if (FindFirstObjectByType<PrototypeHudOverlay>() != null)
             {
                 return;
             }
@@ -26,7 +26,7 @@ namespace Dungeonborn.UI
         {
             if (combat == null)
             {
-                combat = FindObjectOfType<PlayerCombatController>();
+                combat = FindFirstObjectByType<PlayerCombatController>();
             }
 
             EnsureStyles();

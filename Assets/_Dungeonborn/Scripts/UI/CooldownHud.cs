@@ -16,7 +16,7 @@ namespace Dungeonborn.UI
         {
             if (combat == null)
             {
-                combat = FindObjectOfType<PlayerCombatController>();
+                combat = FindFirstObjectByType<PlayerCombatController>();
             }
 
             if (combat == null)
