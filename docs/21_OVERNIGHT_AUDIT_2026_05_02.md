@@ -176,7 +176,8 @@ Current verification still includes:
 2. Let enemies hit the player.
 3. Verify player-hit feedback.
 4. Press `R` to reset.
-5. Run through the full combat loop once:
+5. Run `Dungeonborn > Prototype 0.1 > Validate Combat Sandbox Scene`.
+6. Run through the full combat loop once:
    - Move
    - Dash
    - Basic Attack
@@ -186,7 +187,7 @@ Current verification still includes:
    - Kill enemies
    - Pick up Echo Axe
    - Cleave shockwave
-6. If all works, mark Prototype 0.1.9 verified in `docs/15_CURRENT_BUILD_STATUS.md`.
+7. If all works, mark Prototype 0.1.9, 0.1.10, and 0.1.11 verified in `docs/15_CURRENT_BUILD_STATUS.md`.
 
 ## Next Best Feature After 0.1.10
 

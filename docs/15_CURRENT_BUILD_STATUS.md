@@ -242,6 +242,16 @@ Needs Play Mode verification:
 3. The readout is only for faster sandbox testing.
 4. No player death, healing, potion, inventory, survival loop, or final HUD system was added.
 
+## Prototype 0.1.11 Scene Validation Tool
+
+Needs Unity Editor verification:
+
+1. Added `Dungeonborn > Prototype 0.1 > Validate Combat Sandbox Scene`.
+2. The validator checks key scene wiring before Play Mode.
+3. It checks input actions, player components, combat references, damage numbers, enemies, projectile prefab, loot prefab, layer masks, and guaranteed loot.
+4. It is Editor-only and does not change runtime gameplay.
+5. No new gameplay systems were added.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:
