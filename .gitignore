@@ -1,0 +1,40 @@
+# Unity generated folders
+/Library/
+/Temp/
+/Obj/
+/Build/
+/Builds/
+/Logs/
+/UserSettings/
+/MemoryCaptures/
+
+# Unity generated files
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Unity cache / crash output
+/sysinfo.txt
+*.stackdump
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vs/
+.vscode/
+
+# Local logs from Codex/Unity batch checks
+unity-*.log
+
+# Original imported docs package; canonical copies live in /docs
+/dungeonborn_game_docs.zip
+/dungeonborn_game_docs/

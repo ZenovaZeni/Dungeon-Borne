@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c090b4a190f3ea4448b0985119c6a7f7, type: 3}
+  m_Name: SkeletonGrunt
+  m_EditorClassIdentifier: Dungeonborn.Runtime::Dungeonborn.Enemies.EnemyDefinition
+  enemyId: skeleton_grunt
+  displayName: Skeleton Grunt
+  attackStyle: 0
+  maxHealth: 35
+  moveSpeed: 3.1
+  damage: 7
+  attackRange: 1.5
+  attackCooldown: 1.2
+  bodyColor: {r: 0.75, g: 0.78, b: 0.72, a: 1}
