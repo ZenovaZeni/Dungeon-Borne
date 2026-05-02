@@ -98,18 +98,25 @@ Known feel gaps:
 
 ## Next Priority
 
-Begin the first primitive one-room visual readability pass.
+Verify the first primitive one-room visual readability pass in Play Mode.
 
 Do not add new gameplay systems.
 
-Focus only on:
+Recently added for visual readability:
 
 1. Darker dungeon mood.
 2. Stronger floor/wall contrast.
-3. Clearer player/enemy silhouettes.
+3. Clearer player/enemy silhouette colors.
 4. Simple torch-like placeholder lights.
-5. Optional light fog/ambient tuning.
-6. Keeping every combat action readable.
+5. Light fog and darker camera backdrop.
+6. Bootstrapper defaults matching the visual pass.
+
+Retest should confirm:
+
+1. Combat remains readable.
+2. Player/enemies stand out from the arena.
+3. Skill markers and enemy telegraphs are still visible.
+4. Fog and darkness do not hide loot, damage numbers, or projectiles.
 
 ## Explicit Non-Goals Right Now
 

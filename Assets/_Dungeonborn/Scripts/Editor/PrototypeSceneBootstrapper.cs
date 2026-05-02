@@ -93,12 +93,12 @@ namespace Dungeonborn.Editor
         {
             return new MaterialSet
             {
-                Floor = CreateMaterial("ArenaFloor.mat", new Color(0.19f, 0.18f, 0.2f)),
-                Wall = CreateMaterial("ArenaWall.mat", new Color(0.12f, 0.11f, 0.13f)),
-                Player = CreateMaterial("Fighter.mat", new Color(0.2f, 0.35f, 0.75f)),
-                Skeleton = CreateMaterial("Skeleton.mat", new Color(0.75f, 0.78f, 0.72f)),
-                Archer = CreateMaterial("Archer.mat", new Color(0.35f, 0.55f, 0.35f)),
-                Brute = CreateMaterial("Brute.mat", new Color(0.5f, 0.25f, 0.22f)),
+                Floor = CreateMaterial("ArenaFloor.mat", new Color(0.145f, 0.15f, 0.18f)),
+                Wall = CreateMaterial("ArenaWall.mat", new Color(0.075f, 0.07f, 0.085f)),
+                Player = CreateMaterial("Fighter.mat", new Color(0.18f, 0.48f, 1f)),
+                Skeleton = CreateMaterial("Skeleton.mat", new Color(0.9f, 0.92f, 0.84f)),
+                Archer = CreateMaterial("Archer.mat", new Color(0.35f, 0.9f, 0.46f)),
+                Brute = CreateMaterial("Brute.mat", new Color(0.72f, 0.26f, 0.2f)),
                 Projectile = CreateMaterial("Projectile.mat", new Color(0.8f, 0.2f, 0.15f)),
                 Loot = CreateMaterial("LegendaryLoot.mat", new Color(1f, 0.72f, 0.18f)),
                 Shockwave = CreateMaterial("Shockwave.mat", new Color(0.35f, 0.9f, 1f))
@@ -280,8 +280,9 @@ namespace Dungeonborn.Editor
             var lightObject = new GameObject("Key Light");
             var light = lightObject.AddComponent<Light>();
             light.type = LightType.Directional;
-            light.intensity = 1.2f;
-            lightObject.transform.rotation = Quaternion.Euler(50f, -30f, 0f);
+            light.color = new Color(0.72f, 0.78f, 1f);
+            light.intensity = 0.55f;
+            lightObject.transform.rotation = Quaternion.Euler(58f, -35f, 0f);
         }
 
         private static void CreateMobileHud()
