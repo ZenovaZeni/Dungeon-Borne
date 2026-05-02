@@ -27,10 +27,19 @@ The following have been manually verified:
 - Stomp input works.
 - Rage/ultimate placeholder input works.
 - Attack markers are visible.
+- Dash afterimage feedback is visible.
+- Prototype control overlay is visible.
+- Runtime fallback labels make skill buttons readable.
 - Enemies flash when hit.
 - Enemies can take damage.
 - Enemies can die.
 - All three initial enemies can be killed.
+- Skeleton/Brute melee attack markers are visible.
+- Archer ranged attack/projectile works.
+- Damage numbers appear.
+- Brute drops Echo Axe.
+- Echo Axe can be picked up.
+- Echo Axe modifies Cleave into a visible shockwave.
 
 ## Current Prototype Content
 
@@ -71,23 +80,20 @@ Systems:
 Still needs playtest verification:
 
 - Camera follow quality during active combat.
-- Skeleton Grunt consistently chases and melee attacks.
-- Archer keeps appropriate distance and shoots visible projectiles.
-- Brute moves slowly and hits harder than the grunt.
-- Enemies damage the player.
 - Damage numbers are readable enough in motion.
 - Loot drop is easy to notice.
-- Echo Axe pickup works reliably.
-- Echo Axe modifies Cleave into a visible shockwave after pickup.
+- Brute feels meaningfully heavier than Skeleton Grunt.
+- Archer keeps appropriate distance under repeated play.
+- Enemy attacks are understandable enough before impact.
 
 Known feel gaps:
 
-- Dash feels empty and needs visual/audio feedback.
-- Enemy attacks need telegraphs.
+- Dash has temporary visual feedback but still needs real VFX/audio later.
+- Enemy attacks have temporary markers but need better telegraphs.
 - Enemy death is still placeholder.
 - Attack markers are debug primitives, not final VFX.
 - No audio feedback yet.
-- Mobile UI exists only as placeholder controls and cooldown text.
+- Mobile UI exists only as placeholder controls, fallback labels, and cooldown text.
 
 ## Next Priority
 
@@ -105,6 +111,14 @@ Fix only blockers in this order:
 6. Echo Axe shockwave not appearing.
 7. Damage numbers or attack feedback not readable.
 
+After blockers are stable, the next smallest pass should improve feel:
+
+1. Dash feedback quality.
+2. Hit impact readability.
+3. Enemy attack telegraphs.
+4. Loot pickup feedback.
+5. Skill distinction between Basic Attack, Cleave, Stomp, and Rage.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:
@@ -119,4 +133,3 @@ Do not build:
 - Monetization
 - Large art pass
 - Large asset pack integration
-
