@@ -16,6 +16,7 @@ namespace Dungeonborn.Enemies
 
         private Transform target;
         private Damageable damageable;
+        private CharacterController controller;
         private CooldownTimer attackCooldown;
         private bool attackWindupActive;
         private float attackWindupRemaining;
@@ -24,6 +25,17 @@ namespace Dungeonborn.Enemies
         private void Awake()
         {
             damageable = GetComponent<Damageable>();
+            controller = GetComponent<CharacterController>();
+            if (controller == null)
+            {
+                controller = gameObject.AddComponent<CharacterController>();
+            }
+
+            controller.radius = 0.45f;
+            controller.height = 2f;
+            controller.center = Vector3.zero;
+            DisablePrimitiveCollider();
+
             if (attackOrigin == null)
             {
                 attackOrigin = transform;
@@ -50,9 +62,13 @@ namespace Dungeonborn.Enemies
             toTarget.y = 0f;
             var distance = toTarget.magnitude;
 
-            if (distance > definition.AttackRange)
+            if (definition.AttackStyle == EnemyAttackStyle.Ranged)
             {
-                transform.position += toTarget.normalized * (definition.MoveSpeed * Time.deltaTime);
+                MoveRanged(distance, toTarget);
+            }
+            else if (distance > definition.AttackRange)
+            {
+                Move(toTarget.normalized * (definition.MoveSpeed * Time.deltaTime));
             }
 
             if (toTarget.sqrMagnitude > 0.01f)
@@ -75,6 +91,56 @@ namespace Dungeonborn.Enemies
             if (distance <= definition.AttackRange && attackCooldown.TryStart())
             {
                 StartAttackWindup(toTarget.normalized);
+            }
+        }
+
+        private void MoveRanged(float distance, Vector3 toTarget)
+        {
+            if (toTarget.sqrMagnitude <= 0.001f)
+            {
+                return;
+            }
+
+            var direction = toTarget.normalized;
+            var preferredRange = definition.AttackRange * 0.68f;
+            var tooCloseRange = definition.AttackRange * 0.45f;
+
+            if (distance > definition.AttackRange)
+            {
+                Move(direction * (definition.MoveSpeed * Time.deltaTime));
+            }
+            else if (distance < tooCloseRange)
+            {
+                Move(-direction * (definition.MoveSpeed * Time.deltaTime));
+            }
+            else if (distance < preferredRange)
+            {
+                Move(-direction * (definition.MoveSpeed * 0.45f * Time.deltaTime));
+            }
+        }
+
+        private void Move(Vector3 displacement)
+        {
+            displacement.y = 0f;
+            if (controller != null && controller.enabled)
+            {
+                controller.Move(displacement);
+                return;
+            }
+
+            transform.position += displacement;
+        }
+
+        private void DisablePrimitiveCollider()
+        {
+            foreach (var attachedCollider in GetComponents<Collider>())
+            {
+                if (attachedCollider is CharacterController)
+                {
+                    continue;
+                }
+
+                attachedCollider.enabled = false;
             }
         }
 

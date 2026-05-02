@@ -208,6 +208,11 @@ namespace Dungeonborn.Editor
                 : definition.AttackStyle == EnemyAttackStyle.HeavyMelee
                     ? AssetDatabase.LoadAssetAtPath<Material>(Root + "/Materials/Brute.mat")
                     : AssetDatabase.LoadAssetAtPath<Material>(Root + "/Materials/Skeleton.mat");
+            enemy.GetComponent<CapsuleCollider>().enabled = false;
+            var controller = enemy.AddComponent<CharacterController>();
+            controller.radius = 0.45f;
+            controller.height = 2f;
+            controller.center = Vector3.zero;
 
             var damageable = enemy.AddComponent<Damageable>();
             damageable.Configure(definition.MaxHealth);

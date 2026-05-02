@@ -16,8 +16,8 @@ MonoBehaviour:
   displayName: Archer
   attackStyle: 1
   maxHealth: 28
-  moveSpeed: 2.6
-  damage: 6
-  attackRange: 7
-  attackCooldown: 1.8
+  moveSpeed: 2.25
+  damage: 7
+  attackRange: 8.5
+  attackCooldown: 2.1
   bodyColor: {r: 0.35, g: 0.55, b: 0.35, a: 1}

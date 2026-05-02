@@ -78,6 +78,11 @@ namespace Dungeonborn.Characters
             }
 
             var displacement = direction.normalized * distance;
+            if (characterController == null)
+            {
+                characterController = GetComponent<CharacterController>();
+            }
+
             if (characterController != null && characterController.enabled)
             {
                 characterController.Move(displacement);

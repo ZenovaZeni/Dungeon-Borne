@@ -16,10 +16,10 @@ MonoBehaviour:
   displayName: Cleave
   slot: 2
   shape: 0
-  damage: 22
-  cooldown: 2.5
-  range: 2.6
-  radius: 1.2
-  coneAngle: 100
+  damage: 24
+  cooldown: 2.2
+  range: 3
+  radius: 1.4
+  coneAngle: 115
   force: 0
   debugColor: {r: 0.4, g: 0.8, b: 1, a: 1}

@@ -16,10 +16,10 @@ MonoBehaviour:
   displayName: Slash
   slot: 0
   shape: 0
-  damage: 12
-  cooldown: 0.35
-  range: 2
+  damage: 11
+  cooldown: 0.3
+  range: 1.85
   radius: 1
-  coneAngle: 80
+  coneAngle: 70
   force: 0
   debugColor: {r: 1, g: 1, b: 1, a: 1}

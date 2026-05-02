@@ -16,10 +16,10 @@ MonoBehaviour:
   displayName: Stomp
   slot: 3
   shape: 1
-  damage: 18
-  cooldown: 4
-  range: 2.2
-  radius: 2.2
+  damage: 20
+  cooldown: 4.2
+  range: 2.6
+  radius: 2.6
   coneAngle: 360
   force: 0
   debugColor: {r: 1, g: 0.75, b: 0.25, a: 1}

@@ -16,10 +16,10 @@ MonoBehaviour:
   displayName: Rage Placeholder
   slot: 5
   shape: 1
-  damage: 35
-  cooldown: 12
-  range: 3.2
-  radius: 3.2
+  damage: 40
+  cooldown: 10
+  range: 3.6
+  radius: 3.6
   coneAngle: 360
   force: 0
   debugColor: {r: 1, g: 0.1, b: 0.1, a: 1}

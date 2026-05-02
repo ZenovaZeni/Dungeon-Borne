@@ -79,6 +79,15 @@ Systems:
 
 Still needs playtest verification:
 
+- Prototype 0.1 feel tuning pass:
+  - Basic Attack is faster/shorter and should feel like the quick filler attack.
+  - Cleave is wider, slightly stronger, and should read as the main front arc.
+  - Stomp has a larger circular area and should feel heavier than Cleave.
+  - Rage placeholder has a larger area, higher damage, and shorter cooldown for clearer testing.
+  - Skeleton Grunt is a faster, weaker baseline melee enemy.
+  - Archer has longer range, slower shots, slightly higher shot damage, and should kite backward when too close.
+  - Brute is slower, tankier, harder-hitting, and attacks less often.
+  - Enemy movement now routes through `CharacterController.Move` so Archer kiting should respect arena walls.
 - Camera follow quality during active combat.
 - Damage numbers are readable enough in motion.
 - Loot drop is easy to notice.

@@ -15,9 +15,9 @@ MonoBehaviour:
   enemyId: brute
   displayName: Brute
   attackStyle: 2
-  maxHealth: 85
-  moveSpeed: 1.9
-  damage: 16
-  attackRange: 1.9
-  attackCooldown: 2.4
+  maxHealth: 95
+  moveSpeed: 1.45
+  damage: 22
+  attackRange: 2.1
+  attackCooldown: 3
   bodyColor: {r: 0.5, g: 0.25, b: 0.22, a: 1}
