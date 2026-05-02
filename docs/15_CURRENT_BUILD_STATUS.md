@@ -194,6 +194,17 @@ Follow-up tuning:
 - Runtime placeholder audio was retuned toward lower whoosh/thud sounds for combat and softer chimes for loot.
 - Follow-up retune uses one non-spatial prototype audio source so the lower placeholder sounds remain audible in Play Mode.
 
+## Prototype 0.1.6 Death Readability Placeholder
+
+Verified in Play Mode:
+
+1. Enemy death now tips the primitive body over before cleanup.
+2. Enemy death keeps the existing flash, puff, audio, and delayed removal.
+3. Enemy movement/AI is disabled during the death presentation.
+4. A temporary red fall-direction marker makes the primitive collapse easier to read from the isometric camera.
+5. Existing scene instances force a minimum readable death delay so old serialized values do not hide the change.
+6. No ragdolls, animation system, new enemies, loot systems, or art assets were added.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:
