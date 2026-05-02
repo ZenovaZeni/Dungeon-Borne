@@ -13,10 +13,14 @@ namespace Dungeonborn.Characters
         [SerializeField] private float dashDuration = 0.12f;
         [SerializeField] private Transform cameraTransform;
 
+        private const float DashAfterimageInterval = 0.025f;
+        private const float DashAfterimageLifetime = 0.28f;
+
         private CharacterController controller;
         private PlayerInputReader input;
         private Vector3 lastMoveDirection = Vector3.forward;
         private float dashTimeRemaining;
+        private float dashAfterimageTimeRemaining;
         private Vector3 dashVelocity;
 
         public Vector3 FacingDirection => lastMoveDirection;
@@ -48,7 +52,15 @@ namespace Dungeonborn.Characters
             if (dashTimeRemaining > 0f)
             {
                 dashTimeRemaining -= Time.deltaTime;
+                dashAfterimageTimeRemaining -= Time.deltaTime;
+                if (dashAfterimageTimeRemaining <= 0f)
+                {
+                    SpawnDashAfterimage();
+                    dashAfterimageTimeRemaining = DashAfterimageInterval;
+                }
+
                 controller.Move(dashVelocity * Time.deltaTime);
+                SpawnDashAfterimage();
                 return;
             }
 
@@ -95,7 +107,25 @@ namespace Dungeonborn.Characters
             }
 
             dashTimeRemaining = dashDuration;
+            dashAfterimageTimeRemaining = 0f;
             dashVelocity = lastMoveDirection.normalized * (dashDistance / dashDuration);
+            SpawnDashAfterimage();
+        }
+
+        private void SpawnDashAfterimage()
+        {
+            // Prototype 0.1 playtest feedback: temporary dash trail until real VFX exists.
+            var afterimage = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            afterimage.name = "Playtest_DashAfterimage";
+            afterimage.transform.position = transform.position;
+            afterimage.transform.rotation = transform.rotation;
+            afterimage.transform.localScale = transform.localScale * 0.9f;
+            Destroy(afterimage.GetComponent<Collider>());
+
+            var renderer = afterimage.GetComponent<Renderer>();
+            renderer.material.color = new Color(0.1f, 0.85f, 1f);
+
+            Destroy(afterimage, DashAfterimageLifetime);
         }
     }
 }
