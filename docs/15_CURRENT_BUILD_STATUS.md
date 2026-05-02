@@ -261,6 +261,17 @@ Current edit-mode coverage includes:
 3. Echo Axe modifier set behavior.
 4. Prototype scene, prefab, ScriptableObject, and input action asset presence.
 
+## Prototype 0.1.12 Player Defeat Placeholder
+
+Needs Play Mode verification:
+
+1. When player HP reaches zero, player movement and combat are disabled.
+2. The player primitive darkens and flattens into a defeated placeholder pose.
+3. A temporary red ground marker appears.
+4. A simple `DEFEATED - Press R to reset sandbox` message appears.
+5. `R` reset remains the recovery path.
+6. No lives, respawn system, healing, potions, inventory, menus, or progression systems were added.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:

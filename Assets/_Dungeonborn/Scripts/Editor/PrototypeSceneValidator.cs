@@ -77,6 +77,7 @@ namespace Dungeonborn.Editor
             issues += RequireComponent<PlayerLegendaryModifiers>(player, "PlayerLegendaryModifiers");
             issues += RequireComponent<Damageable>(player, "Damageable");
             issues += RequireComponent<PlayerHitFeedback>(player, "PlayerHitFeedback");
+            issues += RequireComponent<PlayerDefeatFeedback>(player, "PlayerDefeatFeedback");
 
             if (player.TryGetComponent<PlayerInput>(out var input))
             {
