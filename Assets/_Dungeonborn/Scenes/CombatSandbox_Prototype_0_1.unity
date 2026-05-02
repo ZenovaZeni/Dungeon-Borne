@@ -179,7 +179,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512
-  shockwavePrefab: {fileID: 0}
+  shockwavePrefab: {fileID: 1475721302271205368, guid: 1aaafe895f2e5b544a6561f466610225, type: 3}
   damageNumbers: {fileID: 122616946}
 --- !u!114 &32625342
 MonoBehaviour:
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e900865875a32414fbd02a4ebfc6e572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Dungeonborn.Runtime::Dungeonborn.UI.DamageNumberSpawner
-  damageNumberPrefab: {fileID: 0}
+  damageNumberPrefab: {fileID: 606920224446706948, guid: 7582d078676472340b3e7b8dadea59c5, type: 3}
 --- !u!4 &122616947
 Transform:
   m_ObjectHideFlags: 0
@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cb361b9ab831c468088e6e2457c3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Dungeonborn.Runtime::Dungeonborn.Loot.LootDropper
-  pickupPrefab: {fileID: 0}
+  pickupPrefab: {fileID: 7684164639290314612, guid: f33363d23624c864096b278edbd54e90, type: 3}
   guaranteedDrop: {fileID: 0}
 --- !u!114 &314740582
 MonoBehaviour:
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Dungeonborn.Runtime::Dungeonborn.Enemies.EnemyBrain
   definition: {fileID: 11400000, guid: aaf5dff0a9de8ff4cadd06e65a1b63a8, type: 2}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 1137371597822815564, guid: f82994a110ce1ab438129de1e480c7ba, type: 3}
   attackOrigin: {fileID: 0}
   playerLayers:
     serializedVersion: 2
@@ -2197,7 +2197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cb361b9ab831c468088e6e2457c3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Dungeonborn.Runtime::Dungeonborn.Loot.LootDropper
-  pickupPrefab: {fileID: 0}
+  pickupPrefab: {fileID: 7684164639290314612, guid: f33363d23624c864096b278edbd54e90, type: 3}
   guaranteedDrop: {fileID: 11400000, guid: 7c9443031a25ba44fbf590a892061183, type: 2}
 --- !u!114 &1492322562
 MonoBehaviour:
@@ -2212,7 +2212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Dungeonborn.Runtime::Dungeonborn.Enemies.EnemyBrain
   definition: {fileID: 11400000, guid: 7cb9afe76cb81934e8fc046faeaf58ea, type: 2}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 1137371597822815564, guid: f82994a110ce1ab438129de1e480c7ba, type: 3}
   attackOrigin: {fileID: 0}
   playerLayers:
     serializedVersion: 2
@@ -3796,7 +3796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cb361b9ab831c468088e6e2457c3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Dungeonborn.Runtime::Dungeonborn.Loot.LootDropper
-  pickupPrefab: {fileID: 0}
+  pickupPrefab: {fileID: 7684164639290314612, guid: f33363d23624c864096b278edbd54e90, type: 3}
   guaranteedDrop: {fileID: 0}
 --- !u!114 &2081871335
 MonoBehaviour:
@@ -3811,7 +3811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Dungeonborn.Runtime::Dungeonborn.Enemies.EnemyBrain
   definition: {fileID: 11400000, guid: 6d2272d4331210347824058089e5e0cd, type: 2}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 1137371597822815564, guid: f82994a110ce1ab438129de1e480c7ba, type: 3}
   attackOrigin: {fileID: 0}
   playerLayers:
     serializedVersion: 2

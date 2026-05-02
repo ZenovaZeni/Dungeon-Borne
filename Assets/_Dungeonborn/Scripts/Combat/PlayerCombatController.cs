@@ -72,11 +72,13 @@ namespace Dungeonborn.Combat
             }
 
             if (legendaryModifiers != null &&
-                legendaryModifiers.Has(LegendaryModifier.EchoAxe) &&
-                shockwavePrefab != null)
+                legendaryModifiers.Has(LegendaryModifier.EchoAxe))
             {
                 var origin = attackOrigin != null ? attackOrigin : transform;
-                var projectile = Instantiate(shockwavePrefab, origin.position + motor.FacingDirection, Quaternion.LookRotation(motor.FacingDirection));
+                var projectile = shockwavePrefab != null
+                    ? Instantiate(shockwavePrefab, origin.position + motor.FacingDirection, Quaternion.LookRotation(motor.FacingDirection))
+                    : CreateFallbackShockwave(origin.position + motor.FacingDirection, motor.FacingDirection);
+
                 projectile.Launch(motor.FacingDirection, cleave.Damage * 0.7f, enemyLayers, damageNumbers);
             }
         }
@@ -152,6 +154,18 @@ namespace Dungeonborn.Combat
             }
 
             Destroy(marker, 0.16f);
+        }
+
+        private static ShockwaveProjectile CreateFallbackShockwave(Vector3 position, Vector3 direction)
+        {
+            var shockwaveObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            shockwaveObject.name = "FallbackEchoAxeShockwave";
+            shockwaveObject.transform.position = position;
+            shockwaveObject.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            shockwaveObject.transform.localScale = new Vector3(1.2f, 0.2f, 0.6f);
+            Destroy(shockwaveObject.GetComponent<Collider>());
+            shockwaveObject.GetComponent<Renderer>().material.color = new Color(0.35f, 0.9f, 1f);
+            return shockwaveObject.AddComponent<ShockwaveProjectile>();
         }
     }
 }

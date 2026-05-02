@@ -418,9 +418,10 @@ namespace Dungeonborn.Editor
 
         private static GameObject SavePrefab(GameObject instance, string path)
         {
-            var prefab = PrefabUtility.SaveAsPrefabAsset(instance, path);
+            PrefabUtility.SaveAsPrefabAsset(instance, path);
             Object.DestroyImmediate(instance);
-            return prefab;
+            AssetDatabase.ImportAsset(path);
+            return AssetDatabase.LoadAssetAtPath<GameObject>(path);
         }
 
         private static void SetSerialized(Object target, System.Action<SerializedObject> configure)

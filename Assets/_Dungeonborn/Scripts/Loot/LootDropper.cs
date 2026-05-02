@@ -16,13 +16,27 @@ namespace Dungeonborn.Loot
 
         private void DropLoot()
         {
-            if (pickupPrefab == null || guaranteedDrop == null)
+            if (guaranteedDrop == null)
             {
                 return;
             }
 
-            var pickup = Instantiate(pickupPrefab, transform.position + Vector3.up * 0.2f, Quaternion.identity);
+            var pickup = pickupPrefab != null
+                ? Instantiate(pickupPrefab, transform.position + Vector3.up * 0.2f, Quaternion.identity)
+                : CreateFallbackPickup(transform.position + Vector3.up * 0.2f);
+
             pickup.Configure(guaranteedDrop);
+        }
+
+        private static LootPickup CreateFallbackPickup(Vector3 position)
+        {
+            var pickupObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            pickupObject.name = "FallbackLootPickup";
+            pickupObject.transform.position = position;
+            pickupObject.transform.localScale = Vector3.one * 0.7f;
+            pickupObject.GetComponent<Renderer>().material.color = new Color(1f, 0.72f, 0.18f);
+            pickupObject.GetComponent<Collider>().isTrigger = true;
+            return pickupObject.AddComponent<LootPickup>();
         }
     }
 }

@@ -37,7 +37,10 @@ namespace Dungeonborn.Combat
                 if (hit.TryGetComponent<Damageable>(out var damageable) && !damageable.IsDead && hitTargets.Add(damageable))
                 {
                     var result = damageable.ApplyDamage(damage);
-                    damageNumbers?.Spawn(hit.transform.position + Vector3.up * 1.8f, result.Amount);
+                    if (damageNumbers != null)
+                    {
+                        damageNumbers.Spawn(hit.transform.position + Vector3.up * 1.8f, result.Amount);
+                    }
                 }
             }
 
