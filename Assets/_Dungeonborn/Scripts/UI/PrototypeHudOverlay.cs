@@ -35,13 +35,14 @@ namespace Dungeonborn.UI
             var x = 18f;
             var y = 18f;
 
-            GUI.Box(new Rect(x - 12f, y - 12f, width, 190f), string.Empty);
+            GUI.Box(new Rect(x - 12f, y - 12f, width, 218f), string.Empty);
             GUI.Label(new Rect(x, y, width, 26f), "Prototype Controls", labelStyle);
             DrawLine(x, y + 32f, "LMB", "Attack", AbilitySlot.BasicAttack);
             DrawLine(x, y + 60f, "Space", "Dash", null);
             DrawLine(x, y + 88f, "Q", "Cleave", AbilitySlot.Skill1);
             DrawLine(x, y + 116f, "E", "Stomp", AbilitySlot.Skill2);
             DrawLine(x, y + 144f, "F", "Rage", AbilitySlot.Ultimate);
+            DrawLine(x, y + 172f, "R", "Reset", null);
         }
 
         private void DrawLine(float x, float y, string key, string action, AbilitySlot? slot)

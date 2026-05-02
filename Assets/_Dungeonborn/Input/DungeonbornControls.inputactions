@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ResetSandbox",
+                    "type": "Button",
+                    "id": "f14061ab-4d0f-4c42-b12d-b47ec66a7d46",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -252,7 +261,7 @@
                 {
                     "name": "",
                     "id": "899dbf0f-dc94-4980-ac59-f3fe8d959030",
-                    "path": "<Keyboard>/r",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -323,6 +332,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "19da4c7d-a5be-4e3b-884f-84a717216a3f",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ResetSandbox",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

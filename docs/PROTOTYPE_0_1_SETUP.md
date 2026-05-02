@@ -32,6 +32,7 @@ Keyboard / mouse:
 - Cleave: `Q`
 - Stomp: `E`
 - Rage placeholder: `F`
+- Reset sandbox: `R`
 
 Controller:
 

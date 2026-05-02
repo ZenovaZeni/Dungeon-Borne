@@ -18,6 +18,7 @@ namespace Dungeonborn.Input
         public event Action UltimatePressed;
         public event Action InteractPressed;
         public event Action PausePressed;
+        public event Action ResetSandboxPressed;
 
         public Vector2 MoveValue => moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
 
@@ -48,6 +49,7 @@ namespace Dungeonborn.Input
             Bind("Ultimate", _ => UltimatePressed?.Invoke());
             Bind("Interact", _ => InteractPressed?.Invoke());
             Bind("Pause", _ => PausePressed?.Invoke());
+            Bind("ResetSandbox", _ => ResetSandboxPressed?.Invoke());
         }
 
         private void Bind(string actionName, Action<InputAction.CallbackContext> handler)

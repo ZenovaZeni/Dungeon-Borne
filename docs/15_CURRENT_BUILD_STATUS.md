@@ -214,6 +214,16 @@ Verified in Play Mode:
 3. Basic Attack hit spark is larger and includes a quick contact burst.
 4. Damage, cooldowns, enemy health, loot, and skill behavior were not changed.
 
+## Prototype 0.1.8 Sandbox Reset Shortcut
+
+Verified in Play Mode:
+
+1. `R` triggers a playtest reset through the Unity Input System.
+2. Reset reloads the active combat sandbox scene.
+3. Reset restores enemies, loot state, cooldowns, and player position by reloading the scene.
+4. The controls overlay lists `R Reset`.
+5. No enemy waves, progression, menus, inventory, or new gameplay systems were added.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:
