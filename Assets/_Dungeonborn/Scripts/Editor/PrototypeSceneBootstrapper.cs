@@ -177,6 +177,7 @@ namespace Dungeonborn.Editor
             player.AddComponent<PlayerMotor>();
             player.AddComponent<PlayerLegendaryModifiers>();
             player.AddComponent<Damageable>().Configure(100f);
+            player.AddComponent<PlayerHitFeedback>();
 
             var combat = player.AddComponent<PlayerCombatController>();
             SetComponentReference(combat, "basicAttack", skills.BasicAttack);

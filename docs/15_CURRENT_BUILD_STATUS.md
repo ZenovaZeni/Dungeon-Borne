@@ -224,6 +224,15 @@ Verified in Play Mode:
 4. The controls overlay lists `R Reset`.
 5. No enemy waves, progression, menus, inventory, or new gameplay systems were added.
 
+## Prototype 0.1.9 Player Hit Readability
+
+Needs Play Mode verification:
+
+1. Player damage now spawns a short red ring at the player's feet.
+2. Player damage now spawns a short red flash around the player body.
+3. The feedback is attached at runtime for existing scenes and added by the scene bootstrapper for regenerated scenes.
+4. No player death, healing, health bar, potion, balance, or progression systems were added.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:
