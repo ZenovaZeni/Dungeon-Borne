@@ -15,7 +15,7 @@ namespace Dungeonborn.Visual
                 return;
             }
 
-            if (FindFirstObjectByType<PrototypeArenaVisualPass>() != null)
+            if (FindAnyObjectByType<PrototypeArenaVisualPass>() != null)
             {
                 return;
             }
@@ -53,13 +53,14 @@ namespace Dungeonborn.Visual
 
         private static void ApplyCameraBackdrop()
         {
-            if (Camera.main == null)
+            var mainCamera = global::UnityEngine.Camera.main;
+            if (mainCamera == null)
             {
                 return;
             }
 
-            Camera.main.clearFlags = CameraClearFlags.SolidColor;
-            Camera.main.backgroundColor = new Color(0.025f, 0.027f, 0.035f);
+            mainCamera.clearFlags = CameraClearFlags.SolidColor;
+            mainCamera.backgroundColor = new Color(0.025f, 0.027f, 0.035f);
         }
 
         private static void ApplyArenaContrast()
