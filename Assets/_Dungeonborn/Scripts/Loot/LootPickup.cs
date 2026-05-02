@@ -1,4 +1,5 @@
 using Dungeonborn.Characters;
+using Dungeonborn.Audio;
 using TMPro;
 using UnityEngine;
 
@@ -130,6 +131,7 @@ namespace Dungeonborn.Loot
             }
 
             SpawnPickupFeedback(player.transform.position + Vector3.up * 2f);
+            PrototypeAudio.PlayLootPickup(transform.position);
             Destroy(gameObject);
         }
 

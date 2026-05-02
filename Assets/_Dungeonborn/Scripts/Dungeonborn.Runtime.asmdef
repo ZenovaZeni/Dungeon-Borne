@@ -3,7 +3,8 @@
     "rootNamespace": "Dungeonborn",
     "references": [
         "Unity.InputSystem",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "UnityEngine.AudioModule"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

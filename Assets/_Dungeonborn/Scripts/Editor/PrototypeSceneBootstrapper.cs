@@ -268,6 +268,7 @@ namespace Dungeonborn.Editor
             var cameraObject = new GameObject("Isometric Camera");
             cameraObject.tag = "MainCamera";
             var camera = cameraObject.AddComponent<UnityEngine.Camera>();
+            cameraObject.AddComponent<AudioListener>();
             camera.orthographic = true;
             camera.orthographicSize = 7.8f;
             var follow = cameraObject.AddComponent<IsometricCameraFollow>();

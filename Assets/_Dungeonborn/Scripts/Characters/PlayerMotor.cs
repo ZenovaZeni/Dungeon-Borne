@@ -1,4 +1,5 @@
 using Dungeonborn.Input;
+using Dungeonborn.Audio;
 using UnityEngine;
 
 namespace Dungeonborn.Characters
@@ -109,6 +110,7 @@ namespace Dungeonborn.Characters
             dashAfterimageTimeRemaining = 0f;
             dashVelocity = lastMoveDirection.normalized * (dashDistance / dashDuration);
             SpawnDashAfterimage();
+            PrototypeAudio.PlayDash(transform.position);
         }
 
         private void SpawnDashAfterimage()

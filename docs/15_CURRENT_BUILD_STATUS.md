@@ -175,6 +175,25 @@ Verified in Play Mode:
 5. Keyboard and mouse controls still work.
 6. No gameplay mechanics were changed.
 
+## Prototype 0.1.5 Audio Placeholders
+
+Verified in Play Mode:
+
+1. Basic Attack has a placeholder swing sound.
+2. Basic Attack hit has a placeholder impact sound.
+3. Dash has a placeholder sound.
+4. Cleave, Stomp, and Rage have placeholder skill sounds.
+5. Enemy death has a placeholder sound.
+6. Echo Axe drop and pickup have placeholder sounds.
+7. Sounds are generated at runtime; no imported audio assets were added.
+8. No gameplay mechanics were changed.
+
+Follow-up tuning:
+
+- First audio pass sounded too much like small "tink tink" tones.
+- Runtime placeholder audio was retuned toward lower whoosh/thud sounds for combat and softer chimes for loot.
+- Follow-up retune uses one non-spatial prototype audio source so the lower placeholder sounds remain audible in Play Mode.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:

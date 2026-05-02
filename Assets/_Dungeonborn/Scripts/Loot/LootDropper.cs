@@ -1,4 +1,5 @@
 using Dungeonborn.Characters;
+using Dungeonborn.Audio;
 using UnityEngine;
 
 namespace Dungeonborn.Loot
@@ -26,6 +27,7 @@ namespace Dungeonborn.Loot
                 : CreateFallbackPickup(transform.position + Vector3.up * 0.2f);
 
             pickup.Configure(guaranteedDrop);
+            PrototypeAudio.PlayLootDrop(pickup.transform.position);
         }
 
         private static LootPickup CreateFallbackPickup(Vector3 position)

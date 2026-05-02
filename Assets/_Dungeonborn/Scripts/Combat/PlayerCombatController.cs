@@ -1,4 +1,5 @@
 using Dungeonborn.Characters;
+using Dungeonborn.Audio;
 using Dungeonborn.Enemies;
 using Dungeonborn.Input;
 using Dungeonborn.UI;
@@ -109,6 +110,7 @@ namespace Dungeonborn.Combat
             }
 
             var origin = attackOrigin != null ? attackOrigin : transform;
+            PlaySkillAudio(skill, origin.position);
             SpawnPlaytestAttackMarker(skill, origin);
             var damagedTargets = new HashSet<Damageable>();
             foreach (var target in GetSkillTargets(skill, origin.position))
@@ -130,6 +132,7 @@ namespace Dungeonborn.Combat
                 if (skill.Slot == AbilitySlot.BasicAttack)
                 {
                     SpawnBasicAttackHitSpark(target.transform.position, toTarget);
+                    PrototypeAudio.PlayBasicHit(target.transform.position);
                 }
             }
 
@@ -260,6 +263,23 @@ namespace Dungeonborn.Combat
                 AbilitySlot.Ultimate => rageKnockback,
                 _ => 0.25f
             };
+        }
+
+        private static void PlaySkillAudio(SkillDefinition skill, Vector3 position)
+        {
+            switch (skill.Slot)
+            {
+                case AbilitySlot.BasicAttack:
+                    PrototypeAudio.PlayBasicSwing(position);
+                    break;
+                case AbilitySlot.Skill2:
+                case AbilitySlot.Ultimate:
+                    PrototypeAudio.PlayHeavyAbility(position);
+                    break;
+                default:
+                    PrototypeAudio.PlayAbility(position);
+                    break;
+            }
         }
 
         private static Color GetMarkerColor(SkillDefinition skill)

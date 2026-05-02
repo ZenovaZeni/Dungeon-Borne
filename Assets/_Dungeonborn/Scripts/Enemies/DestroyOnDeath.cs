@@ -1,4 +1,5 @@
 using Dungeonborn.Characters;
+using Dungeonborn.Audio;
 using UnityEngine;
 
 namespace Dungeonborn.Enemies
@@ -52,6 +53,7 @@ namespace Dungeonborn.Enemies
 
             dying = true;
             deathTimeRemaining = delay;
+            PrototypeAudio.PlayEnemyDeath(transform.position);
             SpawnDeathPuffs();
 
             foreach (var targetRenderer in renderers)
