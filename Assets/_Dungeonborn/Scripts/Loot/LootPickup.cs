@@ -10,8 +10,11 @@ namespace Dungeonborn.Loot
         [SerializeField] private TextMeshPro label;
         [SerializeField] private float rotateSpeed = 90f;
         [SerializeField] private float pickupRadius = 1.1f;
+        [SerializeField] private float bobHeight = 0.25f;
+        [SerializeField] private float bobSpeed = 4f;
 
         private bool pickedUp;
+        private Vector3 basePosition;
 
         public void Configure(LootItemDefinition configuredItem)
         {
@@ -26,10 +29,17 @@ namespace Dungeonborn.Loot
         private void Start()
         {
             Configure(item);
+            basePosition = transform.position;
         }
 
         private void Update()
         {
+            if (pickedUp)
+            {
+                return;
+            }
+
+            transform.position = basePosition + Vector3.up * (Mathf.Sin(Time.time * bobSpeed) * bobHeight);
             transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime, Space.World);
             TryPickupNearestPlayer();
         }
@@ -73,7 +83,28 @@ namespace Dungeonborn.Loot
                 modifiers.Add(item.LegendaryModifier);
             }
 
+            SpawnPickupFeedback(player.transform.position + Vector3.up * 2f);
             Destroy(gameObject);
+        }
+
+        private void SpawnPickupFeedback(Vector3 position)
+        {
+            var feedbackObject = new GameObject("Echo Axe Pickup Feedback");
+            feedbackObject.transform.position = position;
+            var text = feedbackObject.AddComponent<TextMeshPro>();
+            text.text = item != null ? $"{item.DisplayName} equipped" : "Loot equipped";
+            text.alignment = TextAlignmentOptions.Center;
+            text.fontSize = 3.8f;
+            text.color = new Color(1f, 0.72f, 0.18f);
+            feedbackObject.AddComponent<Dungeonborn.UI.FloatingDamageNumber>();
+
+            var burst = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            burst.name = "Echo Axe Pickup Flash";
+            burst.transform.position = position - Vector3.up * 0.8f;
+            burst.transform.localScale = Vector3.one * 1.2f;
+            Destroy(burst.GetComponent<Collider>());
+            burst.GetComponent<Renderer>().material.color = new Color(1f, 0.72f, 0.18f);
+            Destroy(burst, 0.28f);
         }
     }
 }

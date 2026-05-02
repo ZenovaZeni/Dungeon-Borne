@@ -8,12 +8,13 @@ namespace Dungeonborn.Characters
     {
         [SerializeField] private float maxHealth = 100f;
         [SerializeField] private Color hitFlashColor = Color.white;
-        [SerializeField] private float hitFlashDuration = 0.12f;
+        [SerializeField] private float hitFlashDuration = 0.16f;
 
         private HealthModel health;
         private Renderer[] renderers;
         private Color[] originalColors;
         private float hitFlashRemaining;
+        private CharacterController characterController;
 
         public UnityEvent<DamageResult> Damaged = new UnityEvent<DamageResult>();
         public UnityEvent Died = new UnityEvent();
@@ -25,6 +26,7 @@ namespace Dungeonborn.Characters
         private void Awake()
         {
             health = new HealthModel(maxHealth);
+            characterController = GetComponent<CharacterController>();
             CacheRenderers();
         }
 
@@ -65,6 +67,24 @@ namespace Dungeonborn.Characters
             maxHealth = configuredMaxHealth;
             health ??= new HealthModel(maxHealth);
             health.Reset(maxHealth);
+        }
+
+        public void ApplyKnockback(Vector3 direction, float distance)
+        {
+            direction.y = 0f;
+            if (distance <= 0f || direction.sqrMagnitude <= 0.001f)
+            {
+                return;
+            }
+
+            var displacement = direction.normalized * distance;
+            if (characterController != null && characterController.enabled)
+            {
+                characterController.Move(displacement);
+                return;
+            }
+
+            transform.position += displacement;
         }
 
         private void CacheRenderers()

@@ -17,6 +17,9 @@ namespace Dungeonborn.Enemies
         private Transform target;
         private Damageable damageable;
         private CooldownTimer attackCooldown;
+        private bool attackWindupActive;
+        private float attackWindupRemaining;
+        private Vector3 pendingAttackDirection;
 
         private void Awake()
         {
@@ -57,9 +60,21 @@ namespace Dungeonborn.Enemies
                 transform.rotation = Quaternion.LookRotation(toTarget.normalized);
             }
 
+            if (attackWindupActive)
+            {
+                attackWindupRemaining -= Time.deltaTime;
+                if (attackWindupRemaining <= 0f)
+                {
+                    attackWindupActive = false;
+                    Attack(pendingAttackDirection);
+                }
+
+                return;
+            }
+
             if (distance <= definition.AttackRange && attackCooldown.TryStart())
             {
-                Attack(toTarget.normalized);
+                StartAttackWindup(toTarget.normalized);
             }
         }
 
@@ -73,6 +88,14 @@ namespace Dungeonborn.Enemies
 
             damageable.Configure(definition.MaxHealth);
             attackCooldown = new CooldownTimer(definition.AttackCooldown);
+        }
+
+        private void StartAttackWindup(Vector3 direction)
+        {
+            pendingAttackDirection = direction.sqrMagnitude > 0.001f ? direction.normalized : transform.forward;
+            attackWindupRemaining = GetWindupDuration();
+            attackWindupActive = true;
+            SpawnTelegraphMarker(attackOrigin != null ? attackOrigin : transform, pendingAttackDirection, attackWindupRemaining);
         }
 
         private void Attack(Vector3 direction)
@@ -99,6 +122,7 @@ namespace Dungeonborn.Enemies
                 if (hit.TryGetComponent<Damageable>(out var targetDamageable))
                 {
                     var result = targetDamageable.ApplyDamage(definition.Damage);
+                    targetDamageable.ApplyKnockback(direction, definition.AttackStyle == EnemyAttackStyle.HeavyMelee ? 0.45f : 0.22f);
                     if (damageNumbers != null)
                     {
                         damageNumbers.Spawn(hit.transform.position + Vector3.up * 1.8f, result.Amount);
@@ -132,6 +156,46 @@ namespace Dungeonborn.Enemies
             }
 
             Destroy(marker, 0.18f);
+        }
+
+        private void SpawnTelegraphMarker(Transform origin, Vector3 direction, float duration)
+        {
+            var marker = GameObject.CreatePrimitive(definition.AttackStyle == EnemyAttackStyle.Ranged ? PrimitiveType.Cube : PrimitiveType.Cylinder);
+            marker.name = $"Telegraph_{definition.DisplayName}";
+            Destroy(marker.GetComponent<Collider>());
+
+            var markerRenderer = marker.GetComponent<Renderer>();
+            markerRenderer.material.color = definition.AttackStyle switch
+            {
+                EnemyAttackStyle.Ranged => new Color(1f, 0.08f, 0.08f),
+                EnemyAttackStyle.HeavyMelee => new Color(1f, 0.18f, 0.02f),
+                _ => new Color(1f, 0.85f, 0.1f)
+            };
+
+            if (definition.AttackStyle == EnemyAttackStyle.Ranged)
+            {
+                marker.transform.position = origin.position + direction.normalized * (definition.AttackRange * 0.5f) + Vector3.up * 0.04f;
+                marker.transform.rotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
+                marker.transform.localScale = new Vector3(0.32f, 0.05f, definition.AttackRange);
+            }
+            else
+            {
+                var scale = definition.AttackRange * (definition.AttackStyle == EnemyAttackStyle.HeavyMelee ? 2.5f : 2f);
+                marker.transform.position = origin.position + Vector3.up * 0.04f;
+                marker.transform.localScale = new Vector3(scale, 0.05f, scale);
+            }
+
+            Destroy(marker, duration);
+        }
+
+        private float GetWindupDuration()
+        {
+            return definition.AttackStyle switch
+            {
+                EnemyAttackStyle.Ranged => 0.3f,
+                EnemyAttackStyle.HeavyMelee => 0.45f,
+                _ => 0.2f
+            };
         }
 
         private static Projectile CreateFallbackProjectile(Vector3 position, Vector3 direction)

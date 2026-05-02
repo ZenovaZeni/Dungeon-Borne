@@ -60,7 +60,6 @@ namespace Dungeonborn.Characters
                 }
 
                 controller.Move(dashVelocity * Time.deltaTime);
-                SpawnDashAfterimage();
                 return;
             }
 

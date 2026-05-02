@@ -19,6 +19,9 @@ namespace Dungeonborn.UI
                 : CreateFallbackDamageNumber(position);
 
             number.text = Mathf.RoundToInt(amount).ToString();
+            number.fontSize = 4.6f;
+            number.color = amount >= 25f ? new Color(1f, 0.25f, 0.15f) : new Color(1f, 0.92f, 0.15f);
+            number.transform.localScale = Vector3.one * (amount >= 25f ? 1.25f : 1f);
         }
 
         private static TextMeshPro CreateFallbackDamageNumber(Vector3 position)
@@ -27,8 +30,8 @@ namespace Dungeonborn.UI
             numberObject.transform.position = position;
             var number = numberObject.AddComponent<TextMeshPro>();
             number.alignment = TextAlignmentOptions.Center;
-            number.fontSize = 3f;
-            number.color = Color.white;
+            number.fontSize = 4.6f;
+            number.color = new Color(1f, 0.92f, 0.15f);
             numberObject.AddComponent<FloatingDamageNumber>();
             return number;
         }

@@ -10,6 +10,7 @@ namespace Dungeonborn.Enemies
         [SerializeField] private float speed = 7f;
         [SerializeField] private float lifetime = 2f;
         [SerializeField] private float hitRadius = 0.45f;
+        [SerializeField] private float knockback = 0.22f;
 
         private readonly HashSet<Damageable> hitTargets = new HashSet<Damageable>();
         private Vector3 direction;
@@ -37,6 +38,7 @@ namespace Dungeonborn.Enemies
                 if (hit.TryGetComponent<Damageable>(out var damageable) && hitTargets.Add(damageable))
                 {
                     var result = damageable.ApplyDamage(damage);
+                    damageable.ApplyKnockback(direction, knockback);
                     if (damageNumbers != null)
                     {
                         damageNumbers.Spawn(hit.transform.position + Vector3.up * 1.8f, result.Amount);

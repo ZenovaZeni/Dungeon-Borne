@@ -85,11 +85,18 @@ Still needs playtest verification:
 - Brute feels meaningfully heavier than Skeleton Grunt.
 - Archer keeps appropriate distance under repeated play.
 - Enemy attacks are understandable enough before impact.
+- First combat feel pass changes:
+  - enemy knockback on player hits,
+  - brighter/larger damage numbers,
+  - clearer death flash,
+  - enemy attack windup markers,
+  - loot bob/pickup feedback,
+  - Echo Axe shockwave trail.
 
 Known feel gaps:
 
 - Dash has temporary visual feedback but still needs real VFX/audio later.
-- Enemy attacks have temporary markers but need better telegraphs.
+- Enemy attacks have temporary windup markers but still need real telegraphs later.
 - Enemy death is still placeholder.
 - Attack markers are debug primitives, not final VFX.
 - No audio feedback yet.
@@ -111,13 +118,13 @@ Fix only blockers in this order:
 6. Echo Axe shockwave not appearing.
 7. Damage numbers or attack feedback not readable.
 
-After blockers are stable, the next smallest pass should improve feel:
+After blockers are stable, the next smallest pass should continue improving feel:
 
-1. Dash feedback quality.
-2. Hit impact readability.
-3. Enemy attack telegraphs.
-4. Loot pickup feedback.
-5. Skill distinction between Basic Attack, Cleave, Stomp, and Rage.
+1. Tune knockback distances.
+2. Tune enemy windup timing.
+3. Tune damage number size/lifetime.
+4. Tune loot pickup feedback.
+5. Decide when the primitive feel pass is good enough to begin one-room visual pass.
 
 ## Explicit Non-Goals Right Now
 

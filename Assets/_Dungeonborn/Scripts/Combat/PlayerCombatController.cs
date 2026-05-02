@@ -17,6 +17,10 @@ namespace Dungeonborn.Combat
         [SerializeField] private LayerMask enemyLayers;
         [SerializeField] private ShockwaveProjectile shockwavePrefab;
         [SerializeField] private DamageNumberSpawner damageNumbers;
+        [SerializeField] private float basicKnockback = 0.28f;
+        [SerializeField] private float cleaveKnockback = 0.45f;
+        [SerializeField] private float stompKnockback = 0.65f;
+        [SerializeField] private float rageKnockback = 0.9f;
 
         private readonly SkillCooldownBook cooldowns = new SkillCooldownBook();
         private PlayerInputReader input;
@@ -121,6 +125,7 @@ namespace Dungeonborn.Combat
                 if (hit.TryGetComponent<Damageable>(out var damageable))
                 {
                     var result = damageable.ApplyDamage(skill.Damage);
+                    damageable.ApplyKnockback(toTarget.sqrMagnitude > 0.001f ? toTarget : motor.FacingDirection, GetKnockbackFor(skill));
                     if (damageNumbers != null)
                     {
                         damageNumbers.Spawn(hit.transform.position + Vector3.up * 1.8f, result.Amount);
@@ -139,21 +144,47 @@ namespace Dungeonborn.Combat
             Destroy(marker.GetComponent<Collider>());
 
             var markerRenderer = marker.GetComponent<Renderer>();
-            markerRenderer.material.color = new Color(skill.DebugColor.r, skill.DebugColor.g, skill.DebugColor.b, 0.45f);
+            markerRenderer.material.color = GetMarkerColor(skill);
 
             if (skill.Shape == SkillShape.Circle)
             {
                 marker.transform.position = origin.position + Vector3.up * 0.04f;
-                marker.transform.localScale = new Vector3(skill.Range * 2f, 0.04f, skill.Range * 2f);
+                var scale = skill.Slot == AbilitySlot.Ultimate ? skill.Range * 2.35f : skill.Range * 2f;
+                marker.transform.localScale = new Vector3(scale, 0.05f, scale);
             }
             else
             {
                 marker.transform.position = origin.position + motor.FacingDirection * (skill.Range * 0.5f) + Vector3.up * 0.08f;
                 marker.transform.rotation = Quaternion.LookRotation(motor.FacingDirection, Vector3.up);
-                marker.transform.localScale = new Vector3(skill.Radius * 1.4f, 0.06f, skill.Range);
+                var width = skill.Slot == AbilitySlot.BasicAttack ? skill.Radius * 1.25f : skill.Radius * 2.2f;
+                marker.transform.localScale = new Vector3(width, 0.07f, skill.Range);
             }
 
-            Destroy(marker, 0.16f);
+            Destroy(marker, skill.Slot == AbilitySlot.Ultimate ? 0.32f : 0.2f);
+        }
+
+        private float GetKnockbackFor(SkillDefinition skill)
+        {
+            return skill.Slot switch
+            {
+                AbilitySlot.BasicAttack => basicKnockback,
+                AbilitySlot.Skill1 => cleaveKnockback,
+                AbilitySlot.Skill2 => stompKnockback,
+                AbilitySlot.Ultimate => rageKnockback,
+                _ => 0.25f
+            };
+        }
+
+        private static Color GetMarkerColor(SkillDefinition skill)
+        {
+            return skill.Slot switch
+            {
+                AbilitySlot.BasicAttack => Color.white,
+                AbilitySlot.Skill1 => new Color(0.15f, 0.9f, 1f),
+                AbilitySlot.Skill2 => new Color(1f, 0.65f, 0.1f),
+                AbilitySlot.Ultimate => new Color(1f, 0.08f, 0.04f),
+                _ => skill.DebugColor
+            };
         }
 
         private static ShockwaveProjectile CreateFallbackShockwave(Vector3 position, Vector3 direction)
