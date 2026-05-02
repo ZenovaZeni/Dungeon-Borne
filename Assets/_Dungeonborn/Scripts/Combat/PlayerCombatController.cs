@@ -230,14 +230,25 @@ namespace Dungeonborn.Combat
 
         private void SpawnBasicAttackSlash(Vector3 origin, Vector3 direction, float range)
         {
-            var slash = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            slash.name = "Playtest_BasicAttack_Slash";
-            Destroy(slash.GetComponent<Collider>());
-            slash.transform.position = origin + direction.normalized * (range * 0.58f) + Vector3.up * 0.55f;
-            slash.transform.rotation = Quaternion.LookRotation(direction.normalized, Vector3.up) * Quaternion.Euler(0f, 0f, -24f);
-            slash.transform.localScale = new Vector3(0.12f, 0.08f, range * 1.1f);
-            slash.GetComponent<Renderer>().material.color = new Color(1f, 0.94f, 0.45f);
-            Destroy(slash, 0.11f);
+            var forward = direction.sqrMagnitude > 0.001f ? direction.normalized : transform.forward;
+            var right = Vector3.Cross(Vector3.up, forward).normalized;
+            CreateBasicSlashPiece(
+                "Playtest_BasicAttack_Slash_Main",
+                origin + forward * (range * 0.58f) + right * 0.1f + Vector3.up * 0.62f,
+                forward,
+                new Vector3(0.18f, 0.09f, range * 1.25f),
+                new Color(1f, 0.94f, 0.32f),
+                -30f,
+                0.18f);
+            CreateBasicSlashPiece(
+                "Playtest_BasicAttack_Slash_Edge",
+                origin + forward * (range * 0.62f) - right * 0.18f + Vector3.up * 0.46f,
+                forward,
+                new Vector3(0.11f, 0.07f, range * 0.95f),
+                new Color(1f, 0.55f, 0.18f),
+                20f,
+                0.14f);
+            CreateBasicGroundFlash(origin, forward, range);
         }
 
         private void SpawnBasicAttackHitSpark(Vector3 targetPosition, Vector3 directionToTarget)
@@ -248,9 +259,41 @@ namespace Dungeonborn.Combat
 
             var direction = directionToTarget.sqrMagnitude > 0.001f ? directionToTarget.normalized : motor.FacingDirection;
             spark.transform.position = targetPosition - direction * 0.2f + Vector3.up * 1.1f;
-            spark.transform.localScale = Vector3.one * 0.42f;
+            spark.transform.localScale = Vector3.one * 0.58f;
             spark.GetComponent<Renderer>().material.color = new Color(1f, 0.85f, 0.15f);
-            Destroy(spark, 0.16f);
+            Destroy(spark, 0.22f);
+
+            var burst = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            burst.name = "Playtest_BasicAttack_HitBurst";
+            Destroy(burst.GetComponent<Collider>());
+            burst.transform.position = targetPosition - direction * 0.12f + Vector3.up * 0.18f;
+            burst.transform.localScale = new Vector3(0.85f, 0.04f, 0.85f);
+            burst.GetComponent<Renderer>().material.color = new Color(1f, 0.42f, 0.08f);
+            Destroy(burst, 0.18f);
+        }
+
+        private static void CreateBasicSlashPiece(string name, Vector3 position, Vector3 forward, Vector3 scale, Color color, float roll, float lifetime)
+        {
+            var slash = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            slash.name = name;
+            Destroy(slash.GetComponent<Collider>());
+            slash.transform.position = position;
+            slash.transform.rotation = Quaternion.LookRotation(forward, Vector3.up) * Quaternion.Euler(0f, 0f, roll);
+            slash.transform.localScale = scale;
+            slash.GetComponent<Renderer>().material.color = color;
+            Destroy(slash, lifetime);
+        }
+
+        private static void CreateBasicGroundFlash(Vector3 origin, Vector3 forward, float range)
+        {
+            var flash = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            flash.name = "Playtest_BasicAttack_GroundFlash";
+            Destroy(flash.GetComponent<Collider>());
+            flash.transform.position = origin + forward * (range * 0.5f) + Vector3.up * 0.045f;
+            flash.transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
+            flash.transform.localScale = new Vector3(0.55f, 0.035f, range * 0.85f);
+            flash.GetComponent<Renderer>().material.color = new Color(1f, 0.75f, 0.16f);
+            Destroy(flash, 0.16f);
         }
 
         private float GetKnockbackFor(SkillDefinition skill)

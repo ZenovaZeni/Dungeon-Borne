@@ -205,6 +205,15 @@ Verified in Play Mode:
 5. Existing scene instances force a minimum readable death delay so old serialized values do not hide the change.
 6. No ragdolls, animation system, new enemies, loot systems, or art assets were added.
 
+## Prototype 0.1.7 Basic Attack Clarity
+
+Verified in Play Mode:
+
+1. Basic Attack uses two short placeholder slash streaks instead of one tiny streak.
+2. Basic Attack adds a small ground flash in front of the player.
+3. Basic Attack hit spark is larger and includes a quick contact burst.
+4. Damage, cooldowns, enemy health, loot, and skill behavior were not changed.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:
