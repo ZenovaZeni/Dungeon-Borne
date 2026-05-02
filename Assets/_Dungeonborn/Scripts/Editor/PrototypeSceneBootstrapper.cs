@@ -61,7 +61,7 @@ namespace Dungeonborn.Editor
                 BasicAttack = CreateSkill("BasicAttack.asset", "basic_attack", "Slash", AbilitySlot.BasicAttack, SkillShape.Cone, 12f, 0.35f, 2f, 1f, 80f, Color.white),
                 Cleave = CreateSkill("Cleave.asset", "cleave", "Cleave", AbilitySlot.Skill1, SkillShape.Cone, 22f, 2.5f, 2.6f, 1.2f, 100f, new Color(0.4f, 0.8f, 1f)),
                 Stomp = CreateSkill("Stomp.asset", "stomp", "Stomp", AbilitySlot.Skill2, SkillShape.Circle, 18f, 4f, 2.2f, 2.2f, 360f, new Color(1f, 0.75f, 0.25f)),
-                Rage = CreateSkill("RagePlaceholder.asset", "rage", "Rage Placeholder", AbilitySlot.Ultimate, SkillShape.Circle, 35f, 12f, 3.2f, 3.2f, 360f, new Color(1f, 0.1f, 0.1f))
+                Rage = CreateSkill("RagePlaceholder.asset", "rage", "Rage Placeholder", AbilitySlot.Ultimate, SkillShape.Circle, 22f, 10f, 3.6f, 3.6f, 360f, new Color(1f, 0.1f, 0.1f))
             };
         }
 

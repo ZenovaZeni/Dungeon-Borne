@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Rage Placeholder
   slot: 5
   shape: 1
-  damage: 40
+  damage: 22
   cooldown: 10
   range: 3.6
   radius: 3.6

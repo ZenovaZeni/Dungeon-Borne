@@ -98,7 +98,7 @@ Known feel gaps:
 
 ## Next Priority
 
-Verify the first primitive one-room visual readability pass in Play Mode.
+Verify the primitive visual pass and Rage placeholder balance in Play Mode.
 
 Do not add new gameplay systems.
 
@@ -117,6 +117,7 @@ Retest should confirm:
 2. Player/enemies stand out from the arena.
 3. Skill markers and enemy telegraphs are still visible.
 4. Fog and darkness do not hide loot, damage numbers, or projectiles.
+5. Rage remains obvious but no longer deletes a full-health Archer in one hit.
 
 ## Explicit Non-Goals Right Now
 
