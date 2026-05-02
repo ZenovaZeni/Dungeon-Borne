@@ -269,10 +269,10 @@ namespace Dungeonborn.Editor
             cameraObject.tag = "MainCamera";
             var camera = cameraObject.AddComponent<UnityEngine.Camera>();
             camera.orthographic = true;
-            camera.orthographicSize = 7f;
+            camera.orthographicSize = 7.8f;
             var follow = cameraObject.AddComponent<IsometricCameraFollow>();
             SetComponentReference(follow, "target", target);
-            cameraObject.transform.position = target.position + new Vector3(0f, 11f, -9f);
+            cameraObject.transform.position = target.position + new Vector3(0f, 12.5f, -10.5f);
             cameraObject.transform.rotation = Quaternion.Euler(55f, 0f, 0f);
         }
 

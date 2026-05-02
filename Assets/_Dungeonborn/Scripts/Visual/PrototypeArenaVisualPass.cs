@@ -62,6 +62,8 @@ namespace Dungeonborn.Visual
                 return;
             }
 
+            mainCamera.orthographic = true;
+            mainCamera.orthographicSize = 7.8f;
             mainCamera.clearFlags = CameraClearFlags.SolidColor;
             mainCamera.backgroundColor = new Color(0.025f, 0.027f, 0.035f);
         }

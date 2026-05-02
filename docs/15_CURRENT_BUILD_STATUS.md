@@ -153,6 +153,17 @@ Player preference for a later polish pass:
 
 - Enemy death should eventually read more like enemies falling over instead of fading/shrinking away.
 
+## Prototype 0.1.3 Camera And Framing
+
+Verified in Play Mode:
+
+1. Camera view is slightly wider for better combat context.
+2. Camera has subtle facing-direction look-ahead.
+3. Camera focus is clamped inside the arena so framing does not drift too far outside the room.
+4. Player, enemies, loot, and attack markers remain readable.
+5. No combat, enemy, loot, or input systems were changed.
+6. Movement and combat feel smoother with the updated camera framing.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:
