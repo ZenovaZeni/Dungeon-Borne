@@ -4,7 +4,7 @@ Created: 2026-05-02
 
 ## Purpose
 
-This note captures the useful long-run audit work after Prototype 0.1.8 and the in-progress Prototype 0.1.9 player-hit readability pass.
+This note captures long-run audit work after Prototype 0.1.8, followed by verified checkpoints 0.1.9 through 0.1.11 and implemented-but-pending-verification defeat and Android-readiness placeholders.
 
 The goal is not to expand the game. The goal is to keep the one-room combat sandbox easier to test, easier to understand, and safer to keep iterating.
 
@@ -25,16 +25,17 @@ The current playable baseline includes:
 - Placeholder audio.
 - `R` sandbox reset shortcut through the Unity Input System.
 
-## In-Progress Work
+## Recent Checkpoints
 
-Prototype 0.1.9 adds player-hit readability:
+Prototype 0.1.9 added and verified player-hit readability.
 
-- Red ring at the player's feet when damaged.
-- Red body flash when damaged.
-- Runtime attachment for the current scene.
-- Bootstrapper attachment for regenerated scenes.
+Prototype 0.1.10 added and verified a minimal prototype HP readout.
 
-This needs Play Mode verification.
+Prototype 0.1.11 added and verified the Editor-only scene validation tool.
+
+Prototype 0.1.12 adds a temporary player defeat placeholder and still needs Play Mode verification.
+
+Prototype 0.1.13 adds Build Settings and validator readiness for Android-first testing and still needs Unity Editor verification.
 
 ## Important Audit Notes
 
@@ -49,32 +50,30 @@ Do not re-fix those unless a fresh Play Mode test shows a real regression.
 
 ## Smallest High-Value Next Steps
 
-### 1. Verify Player-Hit Feedback
+### 1. Verify Player Defeat Placeholder
 
 Test:
 
-- Let Skeleton or Brute hit the player.
-- Let Archer projectile hit the player.
-- Confirm the red hit ring and flash are visible.
-- Confirm damage numbers still appear.
-- Confirm movement/combat continue normally after the hit.
+- Let Skeleton, Archer, and Brute damage the player.
+- Confirm the HP readout updates.
+- Confirm reaching zero HP disables player movement/combat.
+- Confirm the defeated marker and reset UI appear.
+- Confirm keyboard `R` and the touch/click reset button recover the sandbox.
 
 If weak:
 
-- Increase ring scale slightly.
-- Increase flash lifetime slightly.
-- Do not add player death, potions, healing, or health UI yet.
+- Increase defeated marker/readout clarity slightly.
+- Do not add lives, potions, healing, inventory, progression, or a final death screen yet.
 
-### 2. Add A Tiny Player Health Readout Later
+### 2. Android Readiness Follow-Up
 
-Prototype 0.1.10 now adds a minimal prototype health number in the existing overlay.
+Prototype 0.1.13 adds the sandbox scene to Build Settings and expands validation.
 
-Keep it primitive:
+Still pending later:
 
-- `HP 86 / 100`
-- No health bar art.
-- No death screen.
-- No healing items.
+- Real Android device or emulator test.
+- Safe-area overlap check for the placeholder mobile HUD.
+- Thumb reach check for stick/buttons.
 
 Reason:
 
@@ -90,16 +89,15 @@ Recent passes improved:
 
 Use these as the bar for Cleave, Stomp, Rage, dash, and loot feedback before any content expansion.
 
-### 4. Add More Edit-Mode Tests
+### 4. Edit-Mode Tests
 
-The pure combat model has low-risk coverage opportunities:
+The pure combat model and prototype assets now have low-risk coverage for:
 
-- Health clamps invalid max health.
-- Health ignores zero/negative damage.
-- Cooldown ignores negative ticks.
-- Zero-duration cooldown can restart immediately.
+- Health/cooldown/modifier basics.
+- Prototype scene/prefab/ScriptableObject/input asset presence.
+- Prototype asset references and expected core components.
 
-These are cheap tests and do not require scene or Unity play mode.
+These tests do not replace Play Mode feel checks.
 
 ### 5. Avoid Scope Expansion
 
@@ -172,12 +170,14 @@ Current verification still includes:
 
 ## Recommended Morning Order
 
-1. Press Play.
-2. Let enemies hit the player.
-3. Verify player-hit feedback.
-4. Press `R` to reset.
-5. Run `Dungeonborn > Prototype 0.1 > Validate Combat Sandbox Scene`.
-6. Run through the full combat loop once:
+1. Run `Dungeonborn > Prototype 0.1 > Validate Combat Sandbox Scene`.
+2. Press Play.
+3. Let enemies hit the player.
+4. Verify player-hit feedback and HP readout.
+5. Let enemies defeat the player.
+6. Verify the defeat placeholder and reset button.
+7. Press `R` to reset.
+8. Run through the full combat loop once:
    - Move
    - Dash
    - Basic Attack
@@ -187,20 +187,24 @@ Current verification still includes:
    - Kill enemies
    - Pick up Echo Axe
    - Cleave shockwave
-7. If all works, mark Prototype 0.1.9, 0.1.10, and 0.1.11 verified in `docs/15_CURRENT_BUILD_STATUS.md`.
+9. If all works, verify Prototype 0.1.12 and 0.1.13 in `docs/15_CURRENT_BUILD_STATUS.md`.
 
-## Next Best Feature After 0.1.10
+## Next Verification Target After 0.1.13
 
-The next smallest useful improvement is verifying and tuning player damage readability.
+The next smallest useful docs-consistent action is Play Mode verification of the player defeat placeholder and Unity Editor verification of Android/validator readiness.
 
 Reason:
 
 - Player-hit feedback and `HP current / max` now make enemy damage testable.
-- The next useful pass is judging whether the red flash/ring is readable without becoming noisy.
+- Prototype 0.1.12 adds temporary defeat behavior that still needs Play Mode confirmation.
+- Prototype 0.1.13 adds Build Settings/validator readiness that still needs Editor confirmation.
 
 Suggested scope:
 
-- Let each enemy type hit the player.
+- Let each enemy type damage the player.
 - Confirm the HP readout updates.
 - Confirm the red hit feedback is visible.
-- Do not add player death behavior yet.
+- Confirm reaching zero HP disables player movement/combat.
+- Confirm the temporary defeat marker and reset UI appear.
+- Confirm `R` reset and touch/click reset recover the sandbox.
+- Run the scene validator and confirm it passes.

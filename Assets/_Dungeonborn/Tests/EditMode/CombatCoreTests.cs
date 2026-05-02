@@ -62,6 +62,52 @@ namespace Dungeonborn.Tests
         }
 
         [Test]
+        public void HealthModelResetRestoresHealthAndClearsDeath()
+        {
+            var health = new HealthModel(10f);
+            health.ApplyDamage(10f);
+
+            health.Reset(25f);
+
+            Assert.That(health.MaxHealth, Is.EqualTo(25f));
+            Assert.That(health.CurrentHealth, Is.EqualTo(25f));
+            Assert.That(health.IsDead, Is.False);
+        }
+
+        [Test]
+        public void HealthModelDamageResultReportsAppliedAmountAndRemainingHealth()
+        {
+            var health = new HealthModel(10f);
+
+            var result = health.ApplyDamage(3f);
+
+            Assert.That(result.Amount, Is.EqualTo(3f));
+            Assert.That(result.RemainingHealth, Is.EqualTo(7f));
+            Assert.That(result.WasFatal, Is.False);
+        }
+
+        [Test]
+        public void CooldownTimerClampsNegativeDurationToZero()
+        {
+            var cooldown = new CooldownTimer(-1f);
+
+            Assert.That(cooldown.Duration, Is.EqualTo(0f));
+            Assert.That(cooldown.TryStart(), Is.True);
+            Assert.That(cooldown.IsReady, Is.True);
+        }
+
+        [Test]
+        public void CooldownTimerNormalizedRemainingReportsFraction()
+        {
+            var cooldown = new CooldownTimer(4f);
+
+            cooldown.TryStart();
+            cooldown.Tick(1f);
+
+            Assert.That(cooldown.NormalizedRemaining, Is.EqualTo(0.75f));
+        }
+
+        [Test]
         public void CooldownIgnoresNegativeTicks()
         {
             var cooldown = new CooldownTimer(2f);
@@ -89,6 +135,16 @@ namespace Dungeonborn.Tests
             var modifiers = new LegendaryModifierSet(LegendaryModifier.EchoAxe);
 
             Assert.That(modifiers.Has(LegendaryModifier.EchoAxe), Is.True);
+            Assert.That(modifiers.Has(LegendaryModifier.None), Is.False);
+        }
+
+        [Test]
+        public void LegendaryModifierSetIgnoresNoneWhenAdded()
+        {
+            var modifiers = new LegendaryModifierSet();
+
+            modifiers.Add(LegendaryModifier.None);
+
             Assert.That(modifiers.Has(LegendaryModifier.None), Is.False);
         }
     }

@@ -1,6 +1,6 @@
 # Prototype 0.1 Unity Setup
 
-This folder is Unity-adoptable source, not proof that Unity Hub has created a valid project yet.
+This repository now contains a Unity-openable Prototype 0.1 project; use these steps when opening it on a fresh machine or regenerating the combat sandbox scene.
 
 ## Create / Open In Unity
 
@@ -47,6 +47,7 @@ Generated mobile placeholders:
 
 - Left on-screen stick maps to left stick.
 - Right-side buttons map to the same gamepad-style actions.
+- Defeat state includes a temporary touch/click reset button.
 
 ## Prototype Loop
 
@@ -60,4 +61,4 @@ Generated mobile placeholders:
 
 ## Placeholder Boundaries
 
-See `TODO_PROTOTYPE_0_1.md` for known placeholders and explicit non-goals.
+See `../TODO_PROTOTYPE_0_1.md` for older placeholder notes and explicit non-goals; prefer `docs/15_CURRENT_BUILD_STATUS.md` for the current checkpoint state.
