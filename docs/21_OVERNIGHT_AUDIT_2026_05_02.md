@@ -149,6 +149,27 @@ Future rule:
 
 - If a new default must affect existing scene objects, enforce a safe runtime minimum or regenerate/save the scene.
 
+### Batchmode Test Running
+
+An overnight attempt was made to run Unity EditMode tests with:
+
+```text
+Unity.exe -batchmode -projectPath "C:\Josh\Projects\Dungeon Borne" -runTests -testPlatform EditMode
+```
+
+Unity refused because the same project was already open in the editor.
+
+Morning option:
+
+- Close the Unity Editor.
+- Re-run EditMode tests from batch mode or use the Unity Test Runner window.
+
+Current verification still includes:
+
+- Runtime assembly compiler check passed.
+- EditMode test assembly compiler check passed.
+- Full Unity Test Runner execution remains pending while the editor is open.
+
 ## Recommended Morning Order
 
 1. Press Play.
