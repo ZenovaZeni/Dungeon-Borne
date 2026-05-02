@@ -1,4 +1,5 @@
 using Dungeonborn.Combat;
+using Dungeonborn.Core;
 using Dungeonborn.Input;
 using UnityEngine;
 
@@ -54,6 +55,7 @@ namespace Dungeonborn.Characters
             pulseTimer += Time.deltaTime * 5f;
             var pulse = 1f + Mathf.Sin(pulseTimer) * 0.04f;
             transform.localScale = new Vector3(pulse, 0.45f, pulse);
+            ApplyDefeatedColor();
         }
 
         private void OnGUI()
@@ -64,11 +66,17 @@ namespace Dungeonborn.Characters
             }
 
             EnsureStyle();
-            const float width = 520f;
+            var width = Mathf.Min(520f, Screen.width - 32f);
             const float height = 80f;
             var rect = new Rect((Screen.width - width) * 0.5f, Screen.height * 0.18f, width, height);
             GUI.Box(rect, string.Empty);
-            GUI.Label(rect, "DEFEATED - Press R to reset sandbox", messageStyle);
+            GUI.Label(new Rect(rect.x, rect.y + 4f, rect.width, 34f), "DEFEATED", messageStyle);
+
+            var buttonRect = new Rect(rect.x + 24f, rect.y + 42f, rect.width - 48f, 30f);
+            if (GUI.Button(buttonRect, "Reset sandbox"))
+            {
+                PrototypeSandboxResetter.ResetActiveSandbox();
+            }
         }
 
         private void HandleDefeated()
@@ -89,6 +97,12 @@ namespace Dungeonborn.Characters
                 combat.enabled = false;
             }
 
+            ApplyDefeatedColor();
+            SpawnDefeatMarker();
+        }
+
+        private void ApplyDefeatedColor()
+        {
             foreach (var targetRenderer in renderers)
             {
                 if (targetRenderer != null)
@@ -96,8 +110,6 @@ namespace Dungeonborn.Characters
                     targetRenderer.material.color = defeatedColor;
                 }
             }
-
-            SpawnDefeatMarker();
         }
 
         private void SpawnDefeatMarker()
@@ -121,7 +133,7 @@ namespace Dungeonborn.Characters
             messageStyle = new GUIStyle(GUI.skin.label)
             {
                 alignment = TextAnchor.MiddleCenter,
-                fontSize = 28,
+                fontSize = Screen.width < 600 ? 22 : 28,
                 fontStyle = FontStyle.Bold,
                 normal = { textColor = Color.white }
             };

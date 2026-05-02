@@ -7,7 +7,9 @@ using Dungeonborn.UI;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.OnScreen;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -29,6 +31,7 @@ namespace Dungeonborn.Editor
 
             var issueCount = 0;
             issueCount += ValidateInputAsset();
+            issueCount += ValidateBuildSettings();
             issueCount += ValidatePlayer();
             issueCount += ValidateSceneServices();
             issueCount += ValidateEnemies();
@@ -56,9 +59,23 @@ namespace Dungeonborn.Editor
             issues += RequireAction(actions, "Gameplay/Dash");
             issues += RequireAction(actions, "Gameplay/Skill1");
             issues += RequireAction(actions, "Gameplay/Skill2");
+            issues += RequireAction(actions, "Gameplay/Skill3");
             issues += RequireAction(actions, "Gameplay/Ultimate");
             issues += RequireAction(actions, "Gameplay/ResetSandbox");
             return issues;
+        }
+
+        private static int ValidateBuildSettings()
+        {
+            foreach (var scene in EditorBuildSettings.scenes)
+            {
+                if (scene.path == ScenePath && scene.enabled)
+                {
+                    return Pass("Combat sandbox scene is enabled in Build Settings.");
+                }
+            }
+
+            return Fail("Combat sandbox scene is not enabled in Build Settings.");
         }
 
         private static int ValidatePlayer()
@@ -76,8 +93,8 @@ namespace Dungeonborn.Editor
             issues += RequireComponent<PlayerCombatController>(player, "PlayerCombatController");
             issues += RequireComponent<PlayerLegendaryModifiers>(player, "PlayerLegendaryModifiers");
             issues += RequireComponent<Damageable>(player, "Damageable");
-            issues += RequireComponent<PlayerHitFeedback>(player, "PlayerHitFeedback");
-            issues += RequireComponent<PlayerDefeatFeedback>(player, "PlayerDefeatFeedback");
+            issues += RequireComponentOrRuntimeAttachment<PlayerHitFeedback>(player, "PlayerHitFeedback");
+            issues += RequireComponentOrRuntimeAttachment<PlayerDefeatFeedback>(player, "PlayerDefeatFeedback");
 
             if (player.TryGetComponent<PlayerInput>(out var input))
             {
@@ -117,6 +134,12 @@ namespace Dungeonborn.Editor
             issues += Object.FindAnyObjectByType<PrototypeHudOverlay>() != null || Application.isPlaying
                 ? Pass("PrototypeHudOverlay is present or will be created at runtime.")
                 : Pass("PrototypeHudOverlay will be created at runtime.");
+            issues += Object.FindAnyObjectByType<EventSystem>() != null ? Pass("Scene has an EventSystem.") : Fail("Scene is missing an EventSystem.");
+            issues += ValidateOnScreenButton("Attack Button", "<Gamepad>/rightTrigger");
+            issues += ValidateOnScreenButton("Dash Button", "<Gamepad>/buttonEast");
+            issues += ValidateOnScreenButton("Cleave Button", "<Gamepad>/buttonWest");
+            issues += ValidateOnScreenButton("Stomp Button", "<Gamepad>/buttonNorth");
+            issues += ValidateOnScreenButton("Rage Button", "<Gamepad>/rightShoulder");
 
             return issues;
         }
@@ -176,6 +199,34 @@ namespace Dungeonborn.Editor
         private static int RequireComponent<T>(GameObject target, string label) where T : Component
         {
             return target.GetComponent<T>() != null ? Pass($"{target.name} has {label}.") : Fail($"{target.name} is missing {label}.");
+        }
+
+        private static int RequireComponentOrRuntimeAttachment<T>(GameObject target, string label) where T : Component
+        {
+            return target.GetComponent<T>() != null
+                ? Pass($"{target.name} has {label}.")
+                : Pass($"{label} will be attached at runtime for existing scenes.");
+        }
+
+        private static int ValidateOnScreenButton(string objectName, string expectedPath)
+        {
+            var button = GameObject.Find(objectName);
+            if (button == null)
+            {
+                return Fail($"Missing mobile HUD button: {objectName}.");
+            }
+
+            var onScreenButton = button.GetComponent<OnScreenButton>();
+            if (onScreenButton == null)
+            {
+                return Fail($"{objectName} is missing OnScreenButton.");
+            }
+
+            var serialized = new SerializedObject(onScreenButton);
+            var controlPath = serialized.FindProperty("m_ControlPath");
+            return controlPath != null && controlPath.stringValue == expectedPath
+                ? Pass($"{objectName} control path is {expectedPath}.")
+                : Fail($"{objectName} control path is not {expectedPath}.");
         }
 
         private static int RequireObjectReference(Object target, string propertyName, string label)

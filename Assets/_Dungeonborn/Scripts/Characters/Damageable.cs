@@ -118,6 +118,11 @@ namespace Dungeonborn.Characters
 
         private void RestoreRendererColors()
         {
+            if (IsDead)
+            {
+                return;
+            }
+
             if (renderers == null || originalColors == null)
             {
                 return;

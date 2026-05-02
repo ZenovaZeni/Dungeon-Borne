@@ -260,6 +260,7 @@ Current edit-mode coverage includes:
 2. Health model death and invalid-value behavior.
 3. Echo Axe modifier set behavior.
 4. Prototype scene, prefab, ScriptableObject, and input action asset presence.
+5. Prototype SkillDefinition, EnemyDefinition, LootItemDefinition, and core prefab component references.
 
 ## Prototype 0.1.12 Player Defeat Placeholder
 
@@ -268,9 +269,21 @@ Needs Play Mode verification:
 1. When player HP reaches zero, player movement and combat are disabled.
 2. The player primitive darkens and flattens into a defeated placeholder pose.
 3. A temporary red ground marker appears.
-4. A simple `DEFEATED - Press R to reset sandbox` message appears.
-5. `R` reset remains the recovery path.
-6. No lives, respawn system, healing, potions, inventory, menus, or progression systems were added.
+4. A simple `DEFEATED` message and touch/click `Reset sandbox` button appear.
+5. `R` reset remains available for keyboard testing.
+6. Fatal hits no longer apply extra knockback after defeat.
+7. The defeat color is reapplied while defeated so hit-flash restoration does not hide it.
+8. No lives, respawn system, healing, potions, inventory, menus, or progression systems were added.
+
+## Prototype 0.1.13 Android/Validation Readiness
+
+Needs Unity Editor verification:
+
+1. Combat sandbox scene is included in Build Settings.
+2. Scene validator checks Build Settings scene inclusion.
+3. Scene validator checks `Skill3`, mobile HUD button control paths, and EventSystem presence.
+4. Validator accepts runtime-attached prototype helper components for existing scenes.
+5. No Android build, safe-area system, settings menu, or production mobile UI was added.
 
 ## Explicit Non-Goals Right Now
 

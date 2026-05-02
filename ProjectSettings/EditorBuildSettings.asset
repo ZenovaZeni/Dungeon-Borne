@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Dungeonborn/Scenes/CombatSandbox_Prototype_0_1.unity
+    guid: f5cccebae9bd93146abf4d2899e5d3c6
   m_configObjects: {}

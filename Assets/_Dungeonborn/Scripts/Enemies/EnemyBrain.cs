@@ -190,7 +190,11 @@ namespace Dungeonborn.Enemies
                 if (hit.TryGetComponent<Damageable>(out var targetDamageable))
                 {
                     var result = targetDamageable.ApplyDamage(definition.Damage);
-                    targetDamageable.ApplyKnockback(direction, definition.AttackStyle == EnemyAttackStyle.HeavyMelee ? 0.45f : 0.22f);
+                    if (!targetDamageable.IsDead)
+                    {
+                        targetDamageable.ApplyKnockback(direction, definition.AttackStyle == EnemyAttackStyle.HeavyMelee ? 0.45f : 0.22f);
+                    }
+
                     if (damageNumbers != null)
                     {
                         damageNumbers.Spawn(hit.transform.position + Vector3.up * 1.8f, result.Amount);

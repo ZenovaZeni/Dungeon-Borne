@@ -50,6 +50,19 @@ namespace Dungeonborn.Core
             }
         }
 
+        public static void ResetActiveSandbox()
+        {
+            var resetter = FindAnyObjectByType<PrototypeSandboxResetter>();
+            if (resetter == null)
+            {
+                var resetterObject = new GameObject("Prototype Sandbox Resetter");
+                DontDestroyOnLoad(resetterObject);
+                resetter = resetterObject.AddComponent<PrototypeSandboxResetter>();
+            }
+
+            resetter.ResetSandbox();
+        }
+
         private void ResetSandbox()
         {
             if (subscribedInput != null)
