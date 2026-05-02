@@ -1,4 +1,5 @@
 using Dungeonborn.Combat;
+using Dungeonborn.Characters;
 using UnityEngine;
 
 namespace Dungeonborn.UI
@@ -6,6 +7,7 @@ namespace Dungeonborn.UI
     public sealed class PrototypeHudOverlay : MonoBehaviour
     {
         private PlayerCombatController combat;
+        private Damageable playerDamageable;
         private GUIStyle labelStyle;
         private GUIStyle keyStyle;
 
@@ -29,13 +31,19 @@ namespace Dungeonborn.UI
                 combat = FindAnyObjectByType<PlayerCombatController>();
             }
 
+            if (playerDamageable == null)
+            {
+                var player = GameObject.FindGameObjectWithTag("Player");
+                playerDamageable = player != null ? player.GetComponent<Damageable>() : null;
+            }
+
             EnsureStyles();
 
             const float width = 220f;
             var x = 18f;
             var y = 18f;
 
-            GUI.Box(new Rect(x - 12f, y - 12f, width, 218f), string.Empty);
+            GUI.Box(new Rect(x - 12f, y - 12f, width, 246f), string.Empty);
             GUI.Label(new Rect(x, y, width, 26f), "Prototype Controls", labelStyle);
             DrawLine(x, y + 32f, "LMB", "Attack", AbilitySlot.BasicAttack);
             DrawLine(x, y + 60f, "Space", "Dash", null);
@@ -43,6 +51,17 @@ namespace Dungeonborn.UI
             DrawLine(x, y + 116f, "E", "Stomp", AbilitySlot.Skill2);
             DrawLine(x, y + 144f, "F", "Rage", AbilitySlot.Ultimate);
             DrawLine(x, y + 172f, "R", "Reset", null);
+            DrawHealthLine(x, y + 204f);
+        }
+
+        private void DrawHealthLine(float x, float y)
+        {
+            var healthText = playerDamageable != null
+                ? $"{Mathf.CeilToInt(playerDamageable.CurrentHealth)} / {Mathf.CeilToInt(playerDamageable.MaxHealth)}"
+                : "-- / --";
+
+            GUI.Label(new Rect(x, y, 62f, 24f), "HP", keyStyle);
+            GUI.Label(new Rect(x + 70f, y, 145f, 24f), healthText, labelStyle);
         }
 
         private void DrawLine(float x, float y, string key, string action, AbilitySlot? slot)

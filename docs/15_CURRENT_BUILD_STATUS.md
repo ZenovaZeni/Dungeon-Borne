@@ -233,6 +233,15 @@ Needs Play Mode verification:
 3. The feedback is attached at runtime for existing scenes and added by the scene bootstrapper for regenerated scenes.
 4. No player death, healing, health bar, potion, balance, or progression systems were added.
 
+## Prototype 0.1.10 Prototype Health Readout
+
+Needs Play Mode verification:
+
+1. The top-left prototype overlay now shows `HP current / max`.
+2. The readout uses the existing player `Damageable`.
+3. The readout is only for faster sandbox testing.
+4. No player death, healing, potion, inventory, survival loop, or final HUD system was added.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:

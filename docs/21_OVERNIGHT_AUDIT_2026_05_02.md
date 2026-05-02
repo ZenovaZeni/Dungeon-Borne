@@ -67,7 +67,7 @@ If weak:
 
 ### 2. Add A Tiny Player Health Readout Later
 
-Only after player-hit feedback is verified, consider a minimal prototype health number in the existing overlay.
+Prototype 0.1.10 now adds a minimal prototype health number in the existing overlay.
 
 Keep it primitive:
 
@@ -167,18 +167,18 @@ Future rule:
    - Cleave shockwave
 6. If all works, mark Prototype 0.1.9 verified in `docs/15_CURRENT_BUILD_STATUS.md`.
 
-## Next Best Feature After 0.1.9
+## Next Best Feature After 0.1.10
 
-The next smallest useful improvement is a minimal player health readout in the existing prototype overlay.
+The next smallest useful improvement is verifying and tuning player damage readability.
 
 Reason:
 
-- It makes enemy damage testable.
-- It does not require player death, healing, inventory, UI polish, or progression.
+- Player-hit feedback and `HP current / max` now make enemy damage testable.
+- The next useful pass is judging whether the red flash/ring is readable without becoming noisy.
 
 Suggested scope:
 
-- Add `HP current / max` to the top-left overlay.
-- Read from the existing player `Damageable`.
-- Keep it plain text.
+- Let each enemy type hit the player.
+- Confirm the HP readout updates.
+- Confirm the red hit feedback is visible.
 - Do not add player death behavior yet.
