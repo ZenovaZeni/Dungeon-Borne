@@ -139,6 +139,20 @@ Retested in Play Mode:
 8. Echo Axe pickup text is easy to see and understand.
 9. Left-click Basic Attack visibly shows both swing and hit impact.
 
+## Prototype 0.1.2 Death And Loot Clarity
+
+Verified in Play Mode:
+
+1. Enemies show a short death flash, shrink, and puff before removal.
+2. Enemy death remains clear without delaying combat too much.
+3. Echo Axe drop shows a temporary gold beam/ring/pulse when it appears.
+4. Echo Axe pickup still works.
+5. No new loot, inventory, enemy, or combat systems were added.
+
+Player preference for a later polish pass:
+
+- Enemy death should eventually read more like enemies falling over instead of fading/shrinking away.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:

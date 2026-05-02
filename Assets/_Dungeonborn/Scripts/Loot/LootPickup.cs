@@ -12,9 +12,14 @@ namespace Dungeonborn.Loot
         [SerializeField] private float pickupRadius = 1.8f;
         [SerializeField] private float bobHeight = 0.25f;
         [SerializeField] private float bobSpeed = 4f;
+        [SerializeField] private float spawnPulseDuration = 1.2f;
 
         private bool pickedUp;
         private Vector3 basePosition;
+        private Vector3 baseScale;
+        private Renderer pickupRenderer;
+        private Color baseColor;
+        private float spawnPulseRemaining;
         private global::UnityEngine.Camera mainCamera;
 
         public void Configure(LootItemDefinition configuredItem)
@@ -34,6 +39,11 @@ namespace Dungeonborn.Loot
             Configure(item);
             EnsurePickupCollider();
             basePosition = transform.position;
+            baseScale = transform.localScale;
+            pickupRenderer = GetComponent<Renderer>();
+            baseColor = pickupRenderer != null ? pickupRenderer.material.color : Color.white;
+            spawnPulseRemaining = spawnPulseDuration;
+            SpawnDropFeedback();
         }
 
         private void Update()
@@ -45,6 +55,7 @@ namespace Dungeonborn.Loot
 
             transform.position = basePosition + Vector3.up * (Mathf.Sin(Time.time * bobSpeed) * bobHeight);
             transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime, Space.World);
+            UpdateSpawnPulse();
             FaceLabelToCamera();
             TryPickupNearestPlayer();
         }
@@ -140,6 +151,47 @@ namespace Dungeonborn.Loot
             Destroy(burst.GetComponent<Collider>());
             burst.GetComponent<Renderer>().material.color = new Color(1f, 0.72f, 0.18f);
             Destroy(burst, 0.28f);
+        }
+
+        private void UpdateSpawnPulse()
+        {
+            if (spawnPulseRemaining <= 0f)
+            {
+                transform.localScale = baseScale;
+                if (pickupRenderer != null)
+                {
+                    pickupRenderer.material.color = baseColor;
+                }
+
+                return;
+            }
+
+            spawnPulseRemaining -= Time.deltaTime;
+            var pulse = Mathf.Abs(Mathf.Sin(Time.time * 12f));
+            transform.localScale = baseScale * Mathf.Lerp(1f, 1.45f, pulse);
+            if (pickupRenderer != null)
+            {
+                pickupRenderer.material.color = Color.Lerp(baseColor, Color.white, pulse * 0.65f);
+            }
+        }
+
+        private void SpawnDropFeedback()
+        {
+            var beam = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            beam.name = "Playtest_LootDropBeam";
+            beam.transform.position = basePosition + Vector3.up * 1.2f;
+            beam.transform.localScale = new Vector3(0.16f, 1.2f, 0.16f);
+            Destroy(beam.GetComponent<Collider>());
+            beam.GetComponent<Renderer>().material.color = new Color(1f, 0.72f, 0.18f);
+            Destroy(beam, spawnPulseDuration);
+
+            var ring = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            ring.name = "Playtest_LootDropRing";
+            ring.transform.position = basePosition + Vector3.up * 0.04f;
+            ring.transform.localScale = new Vector3(1.4f, 0.04f, 1.4f);
+            Destroy(ring.GetComponent<Collider>());
+            ring.GetComponent<Renderer>().material.color = new Color(1f, 0.72f, 0.18f);
+            Destroy(ring, spawnPulseDuration);
         }
     }
 }
