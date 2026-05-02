@@ -164,6 +164,17 @@ Verified in Play Mode:
 5. No combat, enemy, loot, or input systems were changed.
 6. Movement and combat feel smoother with the updated camera framing.
 
+## Prototype 0.1.4 Mobile HUD Sanity
+
+Verified in Play Mode:
+
+1. On-screen movement stick is smaller and less opaque.
+2. On-screen action buttons are smaller and less opaque.
+3. Button spacing leaves more of the arena visible.
+4. Cooldown text is smaller and tucked closer to the relevant buttons.
+5. Keyboard and mouse controls still work.
+6. No gameplay mechanics were changed.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:

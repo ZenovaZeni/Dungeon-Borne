@@ -14,10 +14,10 @@ namespace Dungeonborn.UI
 
         private void Start()
         {
-            ConfigureLabel(basicAttackText, new Vector2(-300f, 28f));
-            ConfigureLabel(cleaveText, new Vector2(-300f, 148f));
-            ConfigureLabel(stompText, new Vector2(-180f, 148f));
-            ConfigureLabel(ultimateText, new Vector2(-60f, 88f));
+            ConfigureLabel(basicAttackText, new Vector2(-264f, 50f));
+            ConfigureLabel(cleaveText, new Vector2(-264f, 154f));
+            ConfigureLabel(stompText, new Vector2(-160f, 154f));
+            ConfigureLabel(ultimateText, new Vector2(-56f, 102f));
         }
 
         private void Update()
@@ -60,10 +60,10 @@ namespace Dungeonborn.UI
             rect.anchorMin = new Vector2(1f, 0f);
             rect.anchorMax = new Vector2(1f, 0f);
             rect.anchoredPosition = anchoredPosition;
-            rect.sizeDelta = new Vector2(96f, 28f);
-            label.fontSize = 15f;
+            rect.sizeDelta = new Vector2(78f, 22f);
+            label.fontSize = 12f;
             label.alignment = TextAlignmentOptions.Center;
-            label.color = new Color(1f, 1f, 1f, 0.92f);
+            label.color = new Color(1f, 1f, 1f, 0.82f);
         }
     }
 }

@@ -300,11 +300,11 @@ namespace Dungeonborn.Editor
             var hud = canvas.AddComponent<CooldownHud>();
 
             CreateOnScreenStick(canvas.transform);
-            CreateOnScreenButton(canvas.transform, "Attack", "<Gamepad>/rightTrigger", new Vector2(-280f, 80f));
-            CreateOnScreenButton(canvas.transform, "Dash", "<Gamepad>/buttonEast", new Vector2(-160f, 80f));
-            CreateOnScreenButton(canvas.transform, "Cleave", "<Gamepad>/buttonWest", new Vector2(-280f, 200f));
-            CreateOnScreenButton(canvas.transform, "Stomp", "<Gamepad>/buttonNorth", new Vector2(-160f, 200f));
-            CreateOnScreenButton(canvas.transform, "Rage", "<Gamepad>/rightShoulder", new Vector2(-40f, 140f));
+            CreateOnScreenButton(canvas.transform, "Attack", "<Gamepad>/rightTrigger", new Vector2(-264f, 84f));
+            CreateOnScreenButton(canvas.transform, "Dash", "<Gamepad>/buttonEast", new Vector2(-160f, 84f));
+            CreateOnScreenButton(canvas.transform, "Cleave", "<Gamepad>/buttonWest", new Vector2(-264f, 188f));
+            CreateOnScreenButton(canvas.transform, "Stomp", "<Gamepad>/buttonNorth", new Vector2(-160f, 188f));
+            CreateOnScreenButton(canvas.transform, "Rage", "<Gamepad>/rightShoulder", new Vector2(-56f, 136f));
 
             SetComponentReference(hud, "basicAttackText", CreateHudLabel(canvas.transform, "AttackCooldown", new Vector2(100f, -40f), "ATK Ready"));
             SetComponentReference(hud, "cleaveText", CreateHudLabel(canvas.transform, "CleaveCooldown", new Vector2(100f, -80f), "CLV Ready"));
@@ -319,9 +319,9 @@ namespace Dungeonborn.Editor
             var rect = stick.AddComponent<RectTransform>();
             rect.anchorMin = new Vector2(0f, 0f);
             rect.anchorMax = new Vector2(0f, 0f);
-            rect.anchoredPosition = new Vector2(160f, 160f);
-            rect.sizeDelta = new Vector2(160f, 160f);
-            stick.AddComponent<Image>().color = new Color(1f, 1f, 1f, 0.18f);
+            rect.anchoredPosition = new Vector2(128f, 128f);
+            rect.sizeDelta = new Vector2(132f, 132f);
+            stick.AddComponent<Image>().color = new Color(1f, 1f, 1f, 0.12f);
             var onScreenStick = stick.AddComponent<OnScreenStick>();
             SetOnScreenControlPath(onScreenStick, "<Gamepad>/leftStick");
         }
@@ -334,8 +334,8 @@ namespace Dungeonborn.Editor
             rect.anchorMin = new Vector2(1f, 0f);
             rect.anchorMax = new Vector2(1f, 0f);
             rect.anchoredPosition = anchoredOffsetFromBottomRight;
-            rect.sizeDelta = new Vector2(96f, 96f);
-            button.AddComponent<Image>().color = new Color(0.1f, 0.1f, 0.12f, 0.75f);
+            rect.sizeDelta = new Vector2(78f, 78f);
+            button.AddComponent<Image>().color = new Color(0.08f, 0.08f, 0.1f, 0.52f);
             button.AddComponent<Button>();
             var onScreenButton = button.AddComponent<OnScreenButton>();
             SetOnScreenControlPath(onScreenButton, controlPath);
@@ -350,12 +350,12 @@ namespace Dungeonborn.Editor
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.anchorMax = new Vector2(0.5f, 0.5f);
             rect.anchoredPosition = position;
-            rect.sizeDelta = new Vector2(160f, 48f);
+            rect.sizeDelta = new Vector2(112f, 34f);
             var label = labelObject.AddComponent<TextMeshProUGUI>();
             label.text = text;
             label.alignment = TextAlignmentOptions.Center;
-            label.fontSize = 20f;
-            label.color = Color.white;
+            label.fontSize = 16f;
+            label.color = new Color(1f, 1f, 1f, 0.88f);
             return label;
         }
 
