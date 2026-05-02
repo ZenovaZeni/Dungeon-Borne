@@ -42,6 +42,11 @@ The following have been manually verified:
 - Echo Axe modifies Cleave into a visible shockwave.
 - Prototype 0.1 feel tuning pass works in Play Mode.
 - Archer kiting respects arena walls.
+- Prototype 0.1.1 readability pass works in Play Mode.
+- Enemy labels and health bars are visible.
+- Compact cooldown HUD is readable.
+- Echo Axe pickup label is readable.
+- Basic Attack slash and hit spark are visible.
 
 ## Current Prototype Content
 
@@ -98,11 +103,17 @@ Known feel gaps:
 
 ## Prototype 0.1.1 Readability Pass
 
-Verify the primitive visual pass, Rage placeholder balance, and first HUD/enemy readability pass in Play Mode.
+Prototype 0.1.1 is now considered verified as the first readability checkpoint after the Combat Sandbox baseline.
+
+See:
+
+```text
+docs/17_PROTOTYPE_0_1_1_NOTES.md
+```
 
 Do not add new gameplay systems.
 
-Recently added for visual readability:
+Verified readability improvements:
 
 1. Darker dungeon mood.
 2. Stronger floor/wall contrast.
@@ -116,7 +127,7 @@ Recently added for visual readability:
 10. Clearer Echo Axe pickup label.
 11. Basic Attack slash streak and hit spark placeholders.
 
-Retest should confirm:
+Retested in Play Mode:
 
 1. Combat remains readable.
 2. Player/enemies stand out from the arena.
