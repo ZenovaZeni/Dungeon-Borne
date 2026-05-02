@@ -114,6 +114,7 @@ Recently added for visual readability:
 8. Smaller top-left prototype controls overlay.
 9. Compact skill cooldown text near mobile buttons.
 10. Clearer Echo Axe pickup label.
+11. Basic Attack slash streak and hit spark placeholders.
 
 Retest should confirm:
 
@@ -125,6 +126,7 @@ Retest should confirm:
 6. Enemy labels/health bars help identify targets without hiding combat.
 7. HUD cooldown text no longer clumps over the combat area.
 8. Echo Axe pickup text is easy to see and understand.
+9. Left-click Basic Attack visibly shows both swing and hit impact.
 
 ## Explicit Non-Goals Right Now
 
