@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Dungeonborn.Enemies;
+using Dungeonborn.UI;
 
 namespace Dungeonborn.Visual
 {
@@ -28,6 +30,7 @@ namespace Dungeonborn.Visual
             ApplyLighting();
             ApplyCameraBackdrop();
             ApplyArenaContrast();
+            ApplyEnemyStatusBillboards();
             CreateTorchPlaceholder("Torch_NorthWest", new Vector3(-7.5f, 2.2f, 10.5f));
             CreateTorchPlaceholder("Torch_NorthEast", new Vector3(7.5f, 2.2f, 10.5f));
             CreateTorchPlaceholder("Torch_SouthWest", new Vector3(-7.5f, 2.2f, -4.5f));
@@ -74,6 +77,17 @@ namespace Dungeonborn.Visual
             SetRendererColor("Skeleton Grunt", new Color(0.9f, 0.92f, 0.84f));
             SetRendererColor("Archer", new Color(0.35f, 0.9f, 0.46f));
             SetRendererColor("Brute", new Color(0.72f, 0.26f, 0.2f));
+        }
+
+        private static void ApplyEnemyStatusBillboards()
+        {
+            foreach (var enemy in FindObjectsByType<EnemyBrain>(FindObjectsInactive.Exclude))
+            {
+                if (enemy.GetComponent<EnemyStatusBillboard>() == null)
+                {
+                    enemy.gameObject.AddComponent<EnemyStatusBillboard>();
+                }
+            }
         }
 
         private static void SetRendererColor(string objectName, Color color)

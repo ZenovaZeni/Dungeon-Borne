@@ -221,6 +221,7 @@ namespace Dungeonborn.Editor
             SetComponentReference(brain, "projectilePrefab", prefabs.ProjectilePrefab);
             SetComponentReference(brain, "damageNumbers", damageNumbers);
             SetLayerMask(brain, "playerLayers", "Player");
+            enemy.AddComponent<EnemyStatusBillboard>();
 
             var dropper = enemy.AddComponent<LootDropper>();
             SetComponentReference(dropper, "pickupPrefab", prefabs.LootPrefab);

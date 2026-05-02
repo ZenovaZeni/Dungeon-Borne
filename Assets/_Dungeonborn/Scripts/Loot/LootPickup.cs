@@ -15,14 +15,17 @@ namespace Dungeonborn.Loot
 
         private bool pickedUp;
         private Vector3 basePosition;
+        private global::UnityEngine.Camera mainCamera;
 
         public void Configure(LootItemDefinition configuredItem)
         {
             item = configuredItem;
             if (label != null && item != null)
             {
-                label.text = item.DisplayName;
+                label.text = $"{item.DisplayName}\nPick up";
                 label.color = item.BeamColor;
+                label.alignment = TextAlignmentOptions.Center;
+                label.fontSize = 2.6f;
             }
         }
 
@@ -42,6 +45,7 @@ namespace Dungeonborn.Loot
 
             transform.position = basePosition + Vector3.up * (Mathf.Sin(Time.time * bobSpeed) * bobHeight);
             transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime, Space.World);
+            FaceLabelToCamera();
             TryPickupNearestPlayer();
         }
 
@@ -87,6 +91,22 @@ namespace Dungeonborn.Loot
 
             sphere.isTrigger = true;
             sphere.radius = Mathf.Max(sphere.radius, pickupRadius);
+        }
+
+        private void FaceLabelToCamera()
+        {
+            if (label == null)
+            {
+                return;
+            }
+
+            mainCamera ??= global::UnityEngine.Camera.main;
+            if (mainCamera == null)
+            {
+                return;
+            }
+
+            label.transform.rotation = Quaternion.LookRotation(label.transform.position - mainCamera.transform.position, Vector3.up);
         }
 
         private void Pickup(GameObject player)

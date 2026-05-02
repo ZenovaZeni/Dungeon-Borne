@@ -96,9 +96,9 @@ Known feel gaps:
 - No audio feedback yet.
 - Mobile UI exists only as placeholder controls, fallback labels, and cooldown text.
 
-## Next Priority
+## Prototype 0.1.1 Readability Pass
 
-Verify the primitive visual pass and Rage placeholder balance in Play Mode.
+Verify the primitive visual pass, Rage placeholder balance, and first HUD/enemy readability pass in Play Mode.
 
 Do not add new gameplay systems.
 
@@ -110,6 +110,10 @@ Recently added for visual readability:
 4. Simple torch-like placeholder lights.
 5. Light fog and darker camera backdrop.
 6. Bootstrapper defaults matching the visual pass.
+7. Enemy name labels and simple health bars.
+8. Smaller top-left prototype controls overlay.
+9. Compact skill cooldown text near mobile buttons.
+10. Clearer Echo Axe pickup label.
 
 Retest should confirm:
 
@@ -118,6 +122,9 @@ Retest should confirm:
 3. Skill markers and enemy telegraphs are still visible.
 4. Fog and darkness do not hide loot, damage numbers, or projectiles.
 5. Rage remains obvious but no longer deletes a full-health Archer in one hit.
+6. Enemy labels/health bars help identify targets without hiding combat.
+7. HUD cooldown text no longer clumps over the combat area.
+8. Echo Axe pickup text is easy to see and understand.
 
 ## Explicit Non-Goals Right Now
 

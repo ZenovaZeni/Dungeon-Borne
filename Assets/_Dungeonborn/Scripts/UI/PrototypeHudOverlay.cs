@@ -31,17 +31,17 @@ namespace Dungeonborn.UI
 
             EnsureStyles();
 
-            const float width = 245f;
-            var x = Screen.width - width - 18f;
-            var y = Screen.height - 230f;
+            const float width = 220f;
+            var x = 18f;
+            var y = 18f;
 
-            GUI.Box(new Rect(x - 12f, y - 12f, width, 205f), string.Empty);
+            GUI.Box(new Rect(x - 12f, y - 12f, width, 190f), string.Empty);
             GUI.Label(new Rect(x, y, width, 26f), "Prototype Controls", labelStyle);
-            DrawLine(x, y + 34f, "LMB", "Basic Attack", AbilitySlot.BasicAttack);
-            DrawLine(x, y + 66f, "Space", "Dash", null);
-            DrawLine(x, y + 98f, "Q", "Cleave", AbilitySlot.Skill1);
-            DrawLine(x, y + 130f, "E", "Stomp", AbilitySlot.Skill2);
-            DrawLine(x, y + 162f, "F", "Rage", AbilitySlot.Ultimate);
+            DrawLine(x, y + 32f, "LMB", "Attack", AbilitySlot.BasicAttack);
+            DrawLine(x, y + 60f, "Space", "Dash", null);
+            DrawLine(x, y + 88f, "Q", "Cleave", AbilitySlot.Skill1);
+            DrawLine(x, y + 116f, "E", "Stomp", AbilitySlot.Skill2);
+            DrawLine(x, y + 144f, "F", "Rage", AbilitySlot.Ultimate);
         }
 
         private void DrawLine(float x, float y, string key, string action, AbilitySlot? slot)
@@ -55,7 +55,7 @@ namespace Dungeonborn.UI
                 suffix = remaining > 0f ? $"  {remaining:0.0}s" : "  Ready";
             }
 
-            GUI.Label(new Rect(x + 72f, y, 160f, 24f), action + suffix, labelStyle);
+            GUI.Label(new Rect(x + 70f, y, 145f, 24f), action + suffix, labelStyle);
         }
 
         private void EnsureStyles()
@@ -67,13 +67,13 @@ namespace Dungeonborn.UI
 
             labelStyle = new GUIStyle(GUI.skin.label)
             {
-                fontSize = 18,
+                fontSize = 15,
                 normal = { textColor = Color.white }
             };
 
             keyStyle = new GUIStyle(GUI.skin.box)
             {
-                fontSize = 16,
+                fontSize = 13,
                 alignment = TextAnchor.MiddleCenter,
                 normal = { textColor = Color.white }
             };

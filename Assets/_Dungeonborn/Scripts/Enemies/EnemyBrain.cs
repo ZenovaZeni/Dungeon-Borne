@@ -22,6 +22,8 @@ namespace Dungeonborn.Enemies
         private float attackWindupRemaining;
         private Vector3 pendingAttackDirection;
 
+        public string DisplayName => definition != null ? definition.DisplayName : gameObject.name;
+
         private void Awake()
         {
             damageable = GetComponent<Damageable>();
