@@ -35,7 +35,7 @@ These effects are temporary:
 - Enemy death still does not use animation.
 - Enemy death does not yet look like falling over.
 - Loot beam/ring are primitive debug shapes.
-- No audio feedback yet.
+- Audio was not part of Prototype 0.1.2; later passes added placeholder generated audio.
 - No final VFX.
 
 ## Player Preference

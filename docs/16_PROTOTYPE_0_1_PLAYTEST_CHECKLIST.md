@@ -66,7 +66,7 @@ The following are intentionally temporary:
 - Temporary loot visuals
 - Placeholder mobile HUD
 - No animation
-- No audio
+- Placeholder generated audio only
 - No final VFX
 
 ## Do Not Add Yet

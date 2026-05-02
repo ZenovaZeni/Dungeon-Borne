@@ -45,14 +45,14 @@ These are still placeholder:
 - Placeholder mobile HUD.
 - Placeholder lighting/fog.
 - No animations.
-- No audio.
+- Audio was not part of Prototype 0.1.1; later passes added placeholder generated audio.
 - No final VFX.
 
 ## Known Feel Gaps
 
 - Enemy death still needs clearer feedback.
 - Loot drop should pulse or flash more strongly when it appears.
-- Dash still needs real VFX/audio later.
+- Dash still needs real VFX/final audio later.
 - Enemy telegraphs are still primitive.
 - UI is readable enough for testing but not final mobile UI.
 - Combat numbers are not final balance.

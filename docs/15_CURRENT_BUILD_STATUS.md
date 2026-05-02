@@ -94,11 +94,11 @@ docs/16_PROTOTYPE_0_1_PLAYTEST_CHECKLIST.md
 
 Known feel gaps:
 
-- Dash has temporary visual feedback but still needs real VFX/audio later.
+- Dash has temporary visual/audio feedback but still needs real VFX/audio later.
 - Enemy attacks have temporary windup markers but still need real telegraphs later.
 - Enemy death is still placeholder.
 - Attack markers are debug primitives, not final VFX.
-- No audio feedback yet.
+- Placeholder runtime audio exists, but no final audio assets or mix pass exist yet.
 - Mobile UI exists only as placeholder controls, fallback labels, and cooldown text.
 
 ## Prototype 0.1.1 Readability Pass
