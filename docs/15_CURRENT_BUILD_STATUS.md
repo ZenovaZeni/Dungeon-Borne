@@ -252,6 +252,15 @@ Needs Unity Editor verification:
 4. It is Editor-only and does not change runtime gameplay.
 5. No new gameplay systems were added.
 
+## Prototype Test Coverage
+
+Current edit-mode coverage includes:
+
+1. Cooldown timer behavior.
+2. Health model death and invalid-value behavior.
+3. Echo Axe modifier set behavior.
+4. Prototype scene, prefab, ScriptableObject, and input action asset presence.
+
 ## Explicit Non-Goals Right Now
 
 Do not build:
