@@ -226,7 +226,7 @@ Verified in Play Mode:
 
 ## Prototype 0.1.9 Player Hit Readability
 
-Needs Play Mode verification:
+Verified in Play Mode:
 
 1. Player damage now spawns a short red ring at the player's feet.
 2. Player damage now spawns a short red flash around the player body.
@@ -235,7 +235,7 @@ Needs Play Mode verification:
 
 ## Prototype 0.1.10 Prototype Health Readout
 
-Needs Play Mode verification:
+Verified in Play Mode:
 
 1. The top-left prototype overlay now shows `HP current / max`.
 2. The readout uses the existing player `Damageable`.
@@ -244,7 +244,7 @@ Needs Play Mode verification:
 
 ## Prototype 0.1.11 Scene Validation Tool
 
-Needs Unity Editor verification:
+Verified in Unity Editor:
 
 1. Added `Dungeonborn > Prototype 0.1 > Validate Combat Sandbox Scene`.
 2. The validator checks key scene wiring before Play Mode.
