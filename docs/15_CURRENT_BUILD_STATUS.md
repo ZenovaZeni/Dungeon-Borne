@@ -40,6 +40,8 @@ The following have been manually verified:
 - Brute drops Echo Axe.
 - Echo Axe can be picked up.
 - Echo Axe modifies Cleave into a visible shockwave.
+- Prototype 0.1 feel tuning pass works in Play Mode.
+- Archer kiting respects arena walls.
 
 ## Current Prototype Content
 
@@ -75,32 +77,15 @@ Systems:
 - Echo Axe legendary modifier.
 - Editor bootstrap tool for regenerating the combat sandbox.
 
-## Known Issues / Not Yet Fully Verified
+## Prototype 0.1 Baseline
 
-Still needs playtest verification:
+Prototype 0.1 is now considered verified as the Combat Sandbox baseline.
 
-- Prototype 0.1 feel tuning pass:
-  - Basic Attack is faster/shorter and should feel like the quick filler attack.
-  - Cleave is wider, slightly stronger, and should read as the main front arc.
-  - Stomp has a larger circular area and should feel heavier than Cleave.
-  - Rage placeholder has a larger area, higher damage, and shorter cooldown for clearer testing.
-  - Skeleton Grunt is a faster, weaker baseline melee enemy.
-  - Archer has longer range, slower shots, slightly higher shot damage, and should kite backward when too close.
-  - Brute is slower, tankier, harder-hitting, and attacks less often.
-  - Enemy movement now routes through `CharacterController.Move` so Archer kiting should respect arena walls.
-- Camera follow quality during active combat.
-- Damage numbers are readable enough in motion.
-- Loot drop is easy to notice.
-- Brute feels meaningfully heavier than Skeleton Grunt.
-- Archer keeps appropriate distance under repeated play.
-- Enemy attacks are understandable enough before impact.
-- First combat feel pass changes:
-  - enemy knockback on player hits,
-  - brighter/larger damage numbers,
-  - clearer death flash,
-  - enemy attack windup markers,
-  - loot bob/pickup feedback,
-  - Echo Axe shockwave trail.
+See:
+
+```text
+docs/16_PROTOTYPE_0_1_PLAYTEST_CHECKLIST.md
+```
 
 Known feel gaps:
 
@@ -113,27 +98,18 @@ Known feel gaps:
 
 ## Next Priority
 
-Continue first playtest verification.
+Begin the first primitive one-room visual readability pass.
 
-Do not add new features.
+Do not add new gameplay systems.
 
-Fix only blockers in this order:
+Focus only on:
 
-1. Console red errors.
-2. Input actions not firing.
-3. Abilities not applying damage.
-4. Enemies not moving or attacking.
-5. Loot not dropping or picking up.
-6. Echo Axe shockwave not appearing.
-7. Damage numbers or attack feedback not readable.
-
-After blockers are stable, the next smallest pass should continue improving feel:
-
-1. Tune knockback distances.
-2. Tune enemy windup timing.
-3. Tune damage number size/lifetime.
-4. Tune loot pickup feedback.
-5. Decide when the primitive feel pass is good enough to begin one-room visual pass.
+1. Darker dungeon mood.
+2. Stronger floor/wall contrast.
+3. Clearer player/enemy silhouettes.
+4. Simple torch-like placeholder lights.
+5. Optional light fog/ambient tuning.
+6. Keeping every combat action readable.
 
 ## Explicit Non-Goals Right Now
 
